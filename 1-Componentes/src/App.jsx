@@ -1,8 +1,9 @@
-import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import ComponenteClase from './components/ComponenteClases';
 import ComponeteFuncionDeclarada from './components/ComponenteFuncion';
 import { ComponeteFuncionExpresada } from './components/ComponenteFuncion';
+import { MyButton } from './components/Button';
+import Profile from './components/avatar';
 import './App.css';
 
 function App() {
@@ -26,14 +27,18 @@ function App() {
           cada componente sea independiente y encapsule su marcado, estilos y
           estado.
         </p>
-        <h3>Componente de Clase</h3>
+        <h3 className="title-one">Componente de Clase</h3>
         <p>Como una clase que extiende de Component con un método render:</p>
         <ComponenteClase></ComponenteClase>
         <ComponenteClase />
-        <h3>Componente Funcional</h3>
+        <h3 className="title-two">Componente Funcional</h3>
         <ComponeteFuncionDeclarada />
         <ComponeteFuncionExpresada />
       </div>
+      <h3 className="title-btn">Componente Botón</h3>
+      <MyButton />
+      <h3 className="title-two">Un componente más largo "Usando un objeto"</h3>
+      <Profile />
       <p className="read-the-docs">1-Componentes</p>
     </div>
   );

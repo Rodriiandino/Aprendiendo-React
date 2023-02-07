@@ -40,3 +40,32 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Estilos para los titulos */
+
+.title-one {
+  color: #646cffaa;
+  font-size: 2rem;
+}
+
+.title-two {
+  color: #61dafbaa;
+  font-size: 2rem;
+}
+
+/* Estilos del componente "MyButton" */
+
+.title-btn {
+  margin-top: 0;
+  color: #646cffaa;
+  font-size: 2rem;
+}
+.btn:hover {
+  box-shadow: 0 0 1rem 0.1rem #646cffaa;
+}
+
+/* Estilos del componente "Avatar" */
+
+.avatar {
+  border-radius: 50%;
+}
