@@ -15,6 +15,7 @@ export default function Propiedades(props) {
         <li>{props.elementoReact}</li>
         <li>{props.componenteReact}</li>
       </ul>
+      <button onClick={handleClick}>Click me</button>
     </div>
   );
 }
@@ -26,3 +27,7 @@ Propiedades.defaultProps = {
 Propiedades.propTypes = {
   numero: PropTypes.number.isRequired,
 };
+
+function handleClick() {
+  alert('You clicked me!');
+}
