@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
-import Estado from './components/Estado';
+import State from './components/CounterState';
+import MyButton from './components/ButtonState';
+import SharingButton from './components/SharingButtonState';
 import './App.css';
 
 function App() {
@@ -15,8 +17,34 @@ function App() {
         </a>
       </div>
       <h1>3-Estados</h1>
+      <p>
+        Si quieres que un componete recuerde cierta informacion, Por ejemplo,
+        tal vez desee contar la cantidad de veces que se hace clic en un botón.
+        Para hacer esto, agregue el estado a su componente.
+      </p>
+      <p>
+        <strong>Primero, importa "useState" desde React</strong>
+      </p>
+      <p>
+        Obtendrá dos cosas de useState: el estado actual (count) y la función
+        que le permite actualizarlo (setCount). Puede darles cualquier nombre,
+        pero la convención es llamarlos como [algo, ponerAlgo].
+      </p>
       <div className="card">
-        <Estado />
+        <MyButton />
+        <p>Cada Boton recuerda su propio estado de conteo</p>
+        <p>La Funciones que empiezan con "use" son llamas "Hooks"</p>
+        <p>
+          Sin embargo, a menudo necesitará componentes para compartir datos y
+          actualizarlos siempre juntos.
+        </p>
+        <p>
+          Para que ambos componentes MyButton muestren el mismo recuento y se
+          actualicen juntos, debe mover el estado de los botones individuales
+          "hacia arriba" al componente más cercano que los contenga a todos.
+        </p>
+        <SharingButton />
+        <State />
       </div>
       <p className="read-the-docs">3-Estados</p>
     </div>
