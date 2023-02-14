@@ -1,34 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <>
+      <h1>TIC-TAC-TOE</h1>
+      <section className="tictactoe">
+        <table>
+          <tbody>
+            <tr>
+              <td className="td-bottom td-right">
+                <button className="square">1</button>
+              </td>
+              <td className="td-bottom td-right td-left">
+                <button className="square">2</button>
+              </td>
+              <td className="td-bottom td-left">
+                <button className="square">3</button>
+              </td>
+            </tr>
+            <tr>
+              <td className="td-bottom td-right td-top">
+                <button className="square">4</button>
+              </td>
+              <td className="td-bottom td-right td-left td-top">
+                <button className="square">5</button>
+              </td>
+              <td className="td-bottom td-left td-top">
+                <button className="square">6</button>
+              </td>
+            </tr>
+            <tr>
+              <td className="td-right td-top">
+                <button className="square">7</button>
+              </td>
+              <td className="td-right td-left td-top">
+                <button className="square">8</button>
+              </td>
+              <td className="td-left td-top">
+                <button className="square">9</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </>
+  );
 }
 
-export default App
+export default App;
