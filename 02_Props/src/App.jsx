@@ -15,7 +15,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>2-Props</h1>
+      <h1>02_props</h1>
       <div className="card">
         <p>
           Son valores que recibe un componente hijo de uno padre. Se agrupan en
@@ -33,7 +33,7 @@ function App() {
           componenteReact={<ComponeteFuncionDeclarada />}
         />
       </div>
-      <p className="read-the-docs">2-Props</p>
+      <p className="read-the-docs">02_props</p>
     </div>
   );
 }

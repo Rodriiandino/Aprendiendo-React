@@ -16,7 +16,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>3-Estados</h1>
+      <h1>03_estados</h1>
       <p>
         Si quieres que un componete recuerde cierta informacion, Por ejemplo,
         tal vez desee contar la cantidad de veces que se hace clic en un botón.
@@ -46,7 +46,7 @@ function App() {
         <SharingButton />
         <State />
       </div>
-      <p className="read-the-docs">3-Estados</p>
+      <p className="read-the-docs">03_estados</p>
     </div>
   );
 }

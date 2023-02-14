@@ -17,7 +17,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>1-Componentes</h1>
+      <h1>01_Componentes</h1>
       <div className="card">
         <p>
           En React se introduce el concepto de componentes para crear la
@@ -39,7 +39,7 @@ function App() {
       <MyButton />
       <h3 className="title-two">Un componente más largo "Usando un objeto"</h3>
       <Profile />
-      <p className="read-the-docs">1-Componentes</p>
+      <p className="read-the-docs">01_Componentes</p>
     </div>
   );
 }
