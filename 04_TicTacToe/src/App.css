@@ -26,3 +26,17 @@
 .td-left {
   border-left: 0.13rem solid #d62ed6;
 }
+
+.player {
+  color: #fafafa;
+}
+
+.circle {
+  color: #d62ed6;
+  font-size: 2rem;
+}
+
+.cross {
+  color: #646cff;
+  font-size: 2rem;
+}
