@@ -36,6 +36,46 @@ function calculateWinner(squares) {
   return null;
 }
 
+function checkEndGame(squares) {
+  return squares.every((square) => square !== null);
+}
+
+function State({ winner, xIsNext }) {
+  let status;
+  let nextStatus;
+  let textPlayer;
+
+  if (winner) {
+    if (winner == 'O') {
+      status = <strong className="circle">'O'</strong>;
+    } else {
+      status = <strong className="cross">'X'</strong>;
+    }
+    textPlayer = 'El ganador es ';
+  } else if (winner == null) {
+    nextStatus = xIsNext ? 'X' : 'O';
+
+    if (nextStatus == 'O') {
+      status = <strong className="circle">'O'</strong>;
+    } else {
+      status = <strong className="cross">'X'</strong>;
+    }
+
+    textPlayer = 'Siguiente Jugador es ';
+  } else {
+    textPlayer = 'Empate';
+  }
+
+  return (
+    <section>
+      <h2 className="player">
+        {textPlayer}
+        {status}
+      </h2>
+    </section>
+  );
+}
+
 export default function App() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   //En una variable creamos un useState en el cual se creara un Array de 9 posiciones "matrix".
@@ -45,6 +85,14 @@ export default function App() {
   const [xIsNext, setXIsNext] = useState(true);
   //Con este useState se usara para verificar si se imprimira un circulo o un cuadrado
   //si el valor de xIsNext es true imprimira un cuadrado en caso contrario sera un circulo
+
+  const [winner, setWinner] = useState(null);
+
+  function resetGame() {
+    setSquares(Array(9).fill(null));
+    setXIsNext(true);
+    setWinner(null);
+  }
 
   function handleClick(i) {
     if (squares[i] || calculateWinner(squares)) {
@@ -63,32 +111,13 @@ export default function App() {
 
     setSquares(listSquares);
     setXIsNext(!xIsNext);
-  }
 
-  const winner = calculateWinner(squares);
-  let status;
-  let nextStatus;
-  let nextPlayer;
-  let winnerPlayer;
-
-  if (winner) {
-    if (winner == 'O') {
-      status = <strong className="circle">'O'</strong>;
-    } else {
-      status = <strong className="cross">'X'</strong>;
+    const newWinner = calculateWinner(listSquares);
+    setWinner(newWinner);
+    if (newWinner) {
+    } else if (checkEndGame(listSquares)) {
+      setWinner(false);
     }
-
-    winnerPlayer = 'El ganador es ';
-  } else {
-    nextStatus = xIsNext ? 'X' : 'O';
-
-    if (nextStatus == 'O') {
-      status = <strong className="circle">'O'</strong>;
-    } else {
-      status = <strong className="cross">'X'</strong>;
-    }
-
-    nextPlayer = 'Siguiente Jugador es ';
   }
 
   return (
@@ -163,10 +192,10 @@ export default function App() {
           </tbody>
         </table>
       </section>
-      <h2 className="player">
-        {nextPlayer || winnerPlayer}
-        {status}
-      </h2>
+      <State winner={winner} xIsNext={xIsNext} />
+      <footer>
+        <button onClick={resetGame}>Empezar de Nuevo</button>
+      </footer>
     </>
   );
 }
