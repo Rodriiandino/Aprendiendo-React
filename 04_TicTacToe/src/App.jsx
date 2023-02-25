@@ -1,102 +1,14 @@
 import './App.css';
 import { useState } from 'react';
+import { Square } from './components/Square';
+import { calculateWinner, checkEndGame } from './components/endGame';
+import { saveGame, resetGameFromStores } from './components/storage';
+import { State } from './components/State';
 
 const TURNS = {
   X: 'X',
   O: 'O',
 };
-
-function Square({ value, onHandleClick }) {
-  //Creo una funcion "square" donde recibira 2 parametros
-  //"value" Sera el atributo que imprimira el boton
-  //"onHandleClick" es una props que representa eventos
-  //en este caso representa una funcial la cual cambiara el valor del atrubito "value" cuando el boton se aprete
-  return (
-    <button className="square" onClick={onHandleClick}>
-      {value}
-    </button>
-  );
-}
-
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-
-  return null;
-}
-
-function checkEndGame(squares) {
-  return squares.every((square) => square !== null);
-}
-
-function State({ winner, newTurn, resetGame }) {
-  let status;
-  let nextStatus;
-  let textPlayer;
-
-  if (winner) {
-    if (winner == 'O') {
-      status = <strong className="circle">'O'</strong>;
-    } else {
-      status = <strong className="cross">'X'</strong>;
-    }
-    textPlayer = 'El ganador es ';
-  } else if (winner === null) {
-    nextStatus = newTurn == 'X' ? 'X' : 'O';
-
-    if (nextStatus == 'O') {
-      status = <strong className="circle">'O'</strong>;
-    } else {
-      status = <strong className="cross">'X'</strong>;
-    }
-
-    textPlayer = 'Siguiente Jugador es ';
-  } else {
-    textPlayer = 'Empate';
-  }
-
-  return (
-    <>
-      <section>
-        <h2 className="player">
-          {textPlayer}
-          {status}
-        </h2>
-      </section>
-      <footer>
-        <button onClick={resetGame}>Empezar de Nuevo</button>
-      </footer>
-    </>
-  );
-}
-
-function saveGame({ squares, turn, winner }) {
-  window.localStorage.setItem('squares', JSON.stringify(squares));
-  window.localStorage.setItem('turn', turn);
-  window.localStorage.setItem('winner', winner);
-}
-
-function resetGameFromStores() {
-  window.localStorage.removeItem('squares');
-  window.localStorage.removeItem('turn');
-  window.localStorage.removeItem('winner');
-}
 
 export default function App() {
   const [squares, setSquares] = useState(() => {
@@ -118,9 +30,9 @@ export default function App() {
 
   const [winner, setWinner] = useState(() => {
     const winnerFromStorage = window.localStorage.getItem('winner');
-    return winnerFromStorage == (TURNS.X || TURNS.O || false)
-      ? winnerFromStorage
-      : null;
+    if (winnerFromStorage === TURNS.X) return winnerFromStorage;
+    if (winnerFromStorage === TURNS.O) return winnerFromStorage;
+    return null;
   });
 
   function resetGame() {
@@ -132,7 +44,6 @@ export default function App() {
   }
 
   function handleClick(i) {
-    console.log(winner);
     if (squares[i] || winner) return;
 
     //En la funcion handleClick() recibira un parametro el cual se usara para navegar por el array
@@ -146,6 +57,7 @@ export default function App() {
     setTurn(newTurn);
 
     const newWinner = calculateWinner(listSquares);
+
     // Guardar Partida
     saveGame({
       squares: listSquares,
