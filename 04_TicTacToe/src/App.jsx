@@ -150,7 +150,7 @@ export default function App() {
           className="github"
           href="https://github.com/Rodriiandino/Aprendiendo-React/tree/main/04_TicTacToe"
         >
-          <img src="assets/github.svg" alt="github" />
+          <img src="/src/assets/github.svg" alt="github" />
         </a>
       </footer>
     </>
