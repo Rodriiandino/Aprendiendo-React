@@ -1,6 +1,11 @@
 import './App.css';
 import { useState } from 'react';
 
+const TURNS = {
+  X: 'X',
+  O: 'O',
+};
+
 function Square({ value, onHandleClick }) {
   //Creo una funcion "square" donde recibira 2 parametros
   //"value" Sera el atributo que imprimira el boton
@@ -40,7 +45,7 @@ function checkEndGame(squares) {
   return squares.every((square) => square !== null);
 }
 
-function State({ winner, xIsNext }) {
+function State({ winner, newTurn, resetGame }) {
   let status;
   let nextStatus;
   let textPlayer;
@@ -52,8 +57,8 @@ function State({ winner, xIsNext }) {
       status = <strong className="cross">'X'</strong>;
     }
     textPlayer = 'El ganador es ';
-  } else if (winner == null) {
-    nextStatus = xIsNext ? 'X' : 'O';
+  } else if (winner === null) {
+    nextStatus = newTurn == 'X' ? 'X' : 'O';
 
     if (nextStatus == 'O') {
       status = <strong className="circle">'O'</strong>;
@@ -67,54 +72,89 @@ function State({ winner, xIsNext }) {
   }
 
   return (
-    <section>
-      <h2 className="player">
-        {textPlayer}
-        {status}
-      </h2>
-    </section>
+    <>
+      <section>
+        <h2 className="player">
+          {textPlayer}
+          {status}
+        </h2>
+      </section>
+      <footer>
+        <button onClick={resetGame}>Empezar de Nuevo</button>
+      </footer>
+    </>
   );
 }
 
+function saveGame({ squares, turn, winner }) {
+  window.localStorage.setItem('squares', JSON.stringify(squares));
+  window.localStorage.setItem('turn', turn);
+  window.localStorage.setItem('winner', winner);
+}
+
+function resetGameFromStores() {
+  window.localStorage.removeItem('squares');
+  window.localStorage.removeItem('turn');
+  window.localStorage.removeItem('winner');
+}
+
 export default function App() {
-  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [squares, setSquares] = useState(() => {
+    const squaresFromStores = window.localStorage.getItem('squares');
+    return squaresFromStores
+      ? JSON.parse(squaresFromStores)
+      : Array(9).fill(null);
+  });
   //En una variable creamos un useState en el cual se creara un Array de 9 posiciones "matrix".
   //Ademas llenamos todo el array con "null"
   //squares almacenara el valor y el setSquares cambiara su valor
 
-  const [xIsNext, setXIsNext] = useState(true);
+  const [turn, setTurn] = useState(() => {
+    const turnFromStorage = window.localStorage.getItem('turn');
+    return turnFromStorage ? turnFromStorage : TURNS.X;
+  });
   //Con este useState se usara para verificar si se imprimira un circulo o un cuadrado
-  //si el valor de xIsNext es true imprimira un cuadrado en caso contrario sera un circulo
+  //si el valor de turn es true imprimira un cuadrado en caso contrario sera un circulo
 
-  const [winner, setWinner] = useState(null);
+  const [winner, setWinner] = useState(() => {
+    const winnerFromStorage = window.localStorage.getItem('winner');
+    return winnerFromStorage == (TURNS.X || TURNS.O || false)
+      ? winnerFromStorage
+      : null;
+  });
 
   function resetGame() {
     setSquares(Array(9).fill(null));
-    setXIsNext(true);
+    setTurn(TURNS.X);
     setWinner(null);
+
+    resetGameFromStores();
   }
 
   function handleClick(i) {
-    if (squares[i] || calculateWinner(squares)) {
-      return;
-    }
+    console.log(winner);
+    if (squares[i] || winner) return;
 
     //En la funcion handleClick() recibira un parametro el cual se usara para navegar por el array
     const listSquares = squares.slice();
     //El método splice() permite cambiar el contenido del arreglo eliminando o sustituyendo los elementos existentes por otros nuevos.
 
-    if (xIsNext) {
-      listSquares[i] = 'X';
-    } else {
-      listSquares[i] = 'O';
-    }
-
+    listSquares[i] = turn;
     setSquares(listSquares);
-    setXIsNext(!xIsNext);
+
+    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
+    setTurn(newTurn);
 
     const newWinner = calculateWinner(listSquares);
-    setWinner(newWinner);
+    // Guardar Partida
+    saveGame({
+      squares: listSquares,
+      turn: newTurn,
+      winner: newWinner,
+    });
+
     if (newWinner) {
+      setWinner(newWinner);
     } else if (checkEndGame(listSquares)) {
       setWinner(false);
     }
@@ -192,10 +232,7 @@ export default function App() {
           </tbody>
         </table>
       </section>
-      <State winner={winner} xIsNext={xIsNext} />
-      <footer>
-        <button onClick={resetGame}>Empezar de Nuevo</button>
-      </footer>
+      <State winner={winner} newTurn={turn} resetGame={resetGame} />
     </>
   );
 }
