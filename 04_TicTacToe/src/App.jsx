@@ -145,6 +145,14 @@ export default function App() {
         </table>
       </section>
       <State winner={winner} newTurn={turn} resetGame={resetGame} />
+      <footer>
+        <a
+          className="github"
+          href="https://github.com/Rodriiandino/Aprendiendo-React/tree/main/04_TicTacToe"
+        >
+          <img src="/src/assets/github.svg" alt="github" />
+        </a>
+      </footer>
     </>
   );
 }
