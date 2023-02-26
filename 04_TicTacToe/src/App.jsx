@@ -4,6 +4,7 @@ import { Square } from './components/Square';
 import { calculateWinner, checkEndGame } from './components/endGame';
 import { saveGame, resetGameFromStores } from './components/storage';
 import { State } from './components/State';
+import github from './assets/github.svg';
 
 const TURNS = {
   X: 'X',
@@ -151,7 +152,7 @@ export default function App() {
           href="https://github.com/Rodriiandino/Aprendiendo-React/tree/main/04_TicTacToe"
           target="_blank"
         >
-          <img src="src/assets/github.svg" alt="github" />
+          <img src={github} alt="github" />
         </a>
       </footer>
     </>
