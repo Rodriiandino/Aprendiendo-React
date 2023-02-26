@@ -1,13 +1,12 @@
-import React from 'react';
-import { useState } from 'react';
+import { useState } from 'react'
 
-//la SharingButton() contiene el estado de los botones por eso que al presionar acmbien el estado juntos
+// la SharingButton() contiene el estado de los botones por eso que al presionar acmbien el estado juntos
 export default function SharingButton() {
-  const [count, setCount] = useState(0);
-  //Con useState le asigno el valor al count
+  const [count, setCount] = useState(0)
+  // Con useState le asigno el valor al count
 
   function handleClick() {
-    setCount(count + 1); //Con setCount le cambio el valor al count
+    setCount(count + 1) // Con setCount le cambio el valor al count
   }
 
   return (
@@ -18,9 +17,9 @@ export default function SharingButton() {
       <ActionButton count={count} onClick={handleClick} />
       <ActionButton count={count} onClick={handleClick} />
     </div>
-  );
+  )
 }
 
 function ActionButton({ count, onClick }) {
-  return <button onClick={onClick}>Clicked {count} times</button>;
+  return <button onClick={onClick}>Clicked {count} times</button>
 }

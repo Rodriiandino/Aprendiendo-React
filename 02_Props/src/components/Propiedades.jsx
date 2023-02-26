@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 export default function Propiedades(props) {
   return (
@@ -17,17 +16,17 @@ export default function Propiedades(props) {
       </ul>
       <button onClick={handleClick}>Click me</button>
     </div>
-  );
+  )
 }
 
 Propiedades.defaultProps = {
-  porDefecto: 'Las Props',
-};
+  porDefecto: 'Las Props'
+}
 
 Propiedades.propTypes = {
-  numero: PropTypes.number.isRequired,
-};
+  numero: PropTypes.number.isRequired
+}
 
 function handleClick() {
-  alert('You clicked me!');
+  alert('You clicked me!')
 }

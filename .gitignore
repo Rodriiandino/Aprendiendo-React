@@ -1,2 +1,8 @@
 # Local Netlify folder
 .netlify
+package-lock.json
+node_modules
+.eslintignore
+.eslintrc.js
+.prettierignore
+

@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import { Component } from 'react'
 
 export default class State extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      counter: 0,
-    };
+      counter: 0
+    }
 
     setInterval(() => {
       this.setState({
-        counter: this.state.counter + 1,
-      });
-    }, 5000);
+        counter: this.state.counter + 1
+      })
+    }, 5000)
   }
 
   render() {
@@ -20,10 +20,10 @@ export default class State extends Component {
         <p>{this.state.counter}</p>
         <StateSon counterSon={this.state.counter} />
       </div>
-    );
+    )
   }
 }
 
 function StateSon(props) {
-  return <h3>{props.counterSon}</h3>;
+  return <h3>{props.counterSon}</h3>
 }

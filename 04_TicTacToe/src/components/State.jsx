@@ -1,33 +1,33 @@
 export const State = ({ winner, newTurn, resetGame }) => {
-  let status;
-  let nextStatus;
-  let textPlayer;
+  let status
+  let nextStatus
+  let textPlayer
 
   if (winner) {
-    if (winner == 'O') {
-      status = <strong className="circle">'O'</strong>;
+    if (winner === 'O') {
+      status = <strong className='circle'>'O'</strong>
     } else {
-      status = <strong className="cross">'X'</strong>;
+      status = <strong className='cross'>'X'</strong>
     }
-    textPlayer = 'El ganador es ';
+    textPlayer = 'El ganador es '
   } else if (winner == null) {
-    nextStatus = newTurn == 'X' ? 'X' : 'O';
+    nextStatus = newTurn === 'X' ? 'X' : 'O'
 
-    if (nextStatus == 'O') {
-      status = <strong className="circle">'O'</strong>;
+    if (nextStatus === 'O') {
+      status = <strong className='circle'>'O'</strong>
     } else {
-      status = <strong className="cross">'X'</strong>;
+      status = <strong className='cross'>'X'</strong>
     }
 
-    textPlayer = 'Siguiente Jugador es ';
+    textPlayer = 'Siguiente Jugador es '
   } else {
-    textPlayer = 'Empate';
+    textPlayer = 'Empate'
   }
 
   return (
     <>
       <section>
-        <h2 className="player">
+        <h2 className='player'>
           {textPlayer}
           {status}
         </h2>
@@ -36,5 +36,5 @@ export const State = ({ winner, newTurn, resetGame }) => {
         <button onClick={resetGame}>Empezar de Nuevo</button>
       </footer>
     </>
-  );
-};
+  )
+}

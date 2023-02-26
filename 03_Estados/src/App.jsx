@@ -1,19 +1,18 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import State from './components/CounterState';
-import MyButton from './components/ButtonState';
-import SharingButton from './components/SharingButtonState';
-import './App.css';
+import reactLogo from './assets/react.svg'
+import State from './components/CounterState'
+import MyButton from './components/ButtonState'
+import SharingButton from './components/SharingButtonState'
+import './App.css'
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
+        <a href='https://vitejs.dev' target='_blank' rel='noreferrer'>
+          <img src='/vite.svg' className='logo' alt='Vite logo' />
         </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+        <a href='https://reactjs.org' target='_blank' rel='noreferrer'>
+          <img src={reactLogo} className='logo react' alt='React logo' />
         </a>
       </div>
       <h1>03_estados</h1>
@@ -30,7 +29,7 @@ function App() {
         que le permite actualizarlo (setCount). Puede darles cualquier nombre,
         pero la convención es llamarlos como [algo, ponerAlgo].
       </p>
-      <div className="card">
+      <div className='card'>
         <MyButton />
         <p>Cada Boton recuerda su propio estado de conteo</p>
         <p>La Funciones que empiezan con "use" son llamas "Hooks"</p>
@@ -46,9 +45,9 @@ function App() {
         <SharingButton />
         <State />
       </div>
-      <p className="read-the-docs">03_estados</p>
+      <p className='read-the-docs'>03_estados</p>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
