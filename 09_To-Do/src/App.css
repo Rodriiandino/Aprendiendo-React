@@ -1,0 +1,58 @@
+#root {
+  max-width: 1280px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+main {
+  display: grid;
+  height: 90%;
+  grid-template-columns: 40% 60%;
+  grid-template-rows: auto;
+  grid-template-areas: 'card-form cards-task';
+}
+
+.title {
+  margin-bottom: 2rem;
+}
+
+.container-form {
+  grid-area: card-form;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-form {
+  border: 2px solid #fdfdfd;
+  width: 300px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  grid-area: cards-task;
+  border: 2px solid #fdfdfd;
+  width: 300px;
+  height: fit-content;
+}
+
+.container * {
+  margin: 0;
+  padding: 0;
+}
+
+.container header {
+  background-color: #7278e0;
+}
+
+.container div {
+  background-color: #373ec2;
+}
+
+.container footer {
+  background-color: #646cff;
+}
