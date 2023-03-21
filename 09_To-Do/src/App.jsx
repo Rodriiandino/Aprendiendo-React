@@ -1,21 +1,31 @@
 import './App.css'
 import AddTodo from './components/AddTodo'
+import CardTodo from './components/cardTodo'
 import { useState } from 'react'
 
 function App() {
+  // "init" donde se almacenara el array de objetos
   const init = []
 
+  // "toDo" es el array de objetos
   const [toDo, setToDo] = useState(init)
 
-  function handleAddTodo(title, description, level) {
+  // "handleAddTodo" es la funcion que se encarga de agregar un nuevo objeto al array
+  const handleAddTodo = (id, title, description, level) => {
     setToDo([
       ...toDo,
       {
+        id,
         title,
         description,
         level
       }
     ])
+  }
+
+  // "handleDeleteCard" es la funcion que se encarga de eliminar un objeto del array
+  const handleDeleteCard = id => {
+    setToDo(toDo.filter(toDo => toDo.id !== id))
   }
 
   return (
@@ -25,16 +35,7 @@ function App() {
         <AddTodo onAddTodo={handleAddTodo} />
 
         <section className='container'>
-          <header>
-            <p>{toDo.title}</p>
-            <p>{toDo.level}</p>
-          </header>
-          <div>
-            <p>{toDo.description}</p>
-          </div>
-          <footer>
-            <button>Delete</button>
-          </footer>
+          <CardTodo toDo={toDo} onDeleteCard={handleDeleteCard} />
         </section>
       </main>
     </>

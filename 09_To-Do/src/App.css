@@ -35,24 +35,30 @@ main {
 
 .container {
   grid-area: cards-task;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.info {
   border: 2px solid #fdfdfd;
   width: 300px;
   height: fit-content;
+  margin: 1rem;
 }
 
-.container * {
+.info * {
   margin: 0;
-  padding: 0;
+  padding: 0.5rem;
 }
 
-.container header {
+.info header {
   background-color: #7278e0;
 }
 
-.container div {
+.info div {
   background-color: #373ec2;
 }
 
-.container footer {
+.info footer {
   background-color: #646cff;
 }

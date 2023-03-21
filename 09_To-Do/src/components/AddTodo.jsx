@@ -2,15 +2,26 @@ import { useState } from 'react'
 
 export default function AddTodo({ onAddTodo }) {
   const [inputValue, setInputValue] = useState({
+    id: 0,
     title: '',
     description: '',
-    level: ''
+    level: 'low'
   })
 
   const handleSubmit = e => {
     e.preventDefault()
-    onAddTodo(inputValue.title, inputValue.description, inputValue.level)
-    setInputValue({ title: '', description: '', level: '' })
+    onAddTodo(
+      inputValue.id,
+      inputValue.title,
+      inputValue.description,
+      inputValue.level
+    )
+    setInputValue({
+      id: inputValue.id + 1,
+      title: '',
+      description: '',
+      level: ''
+    })
   }
 
   return (
@@ -25,6 +36,7 @@ export default function AddTodo({ onAddTodo }) {
                 setInputValue({ ...inputValue, title: e.target.value })
               }
               required
+              placeholder='Title'
             />
           </label>
           <label>
@@ -34,16 +46,23 @@ export default function AddTodo({ onAddTodo }) {
               onChange={e =>
                 setInputValue({ ...inputValue, description: e.target.value })
               }
+              required
+              placeholder='Description'
             />
           </label>
           <label>
-            <input
-              type='text'
+            Level
+            <select
+              name='combo'
               value={inputValue.level}
               onChange={e =>
                 setInputValue({ ...inputValue, level: e.target.value })
               }
-            />
+            >
+              <option value='low'>Low</option>
+              <option value='medium'>Medium</option>
+              <option value='hard'>Hard</option>
+            </select>
           </label>
           <button type='submit'>ToDo</button>
         </form>
