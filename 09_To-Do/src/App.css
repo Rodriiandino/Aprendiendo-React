@@ -8,7 +8,7 @@
 
 main {
   display: grid;
-  height: 85%;
+  height: max-content;
   grid-template-columns: 40% 60%;
   grid-template-rows: auto;
   grid-template-areas: 'card-form cards-task';
@@ -23,10 +23,11 @@ main {
   grid-area: card-form;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .card-form {
+  position: sticky;
+  top: 32px;
   width: 300px;
   height: fit-content;
   border: 2px solid #3d3952;
@@ -64,6 +65,7 @@ main {
   grid-area: cards-task;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .info {
@@ -110,6 +112,11 @@ main {
 }
 
 .footer {
+  position: sticky;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #242424;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -157,5 +164,16 @@ main {
   .container {
     justify-content: center;
     align-items: center;
+  }
+
+  .card-form {
+    position: relative;
+    top: 0;
+  }
+}
+
+@media screen and (max-height: 900px) {
+  .footer {
+    position: relative;
   }
 }

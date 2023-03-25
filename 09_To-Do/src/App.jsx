@@ -2,7 +2,7 @@ import './App.css'
 import AddTodo from './components/AddTodo'
 import CardTodo from './components/cardTodo'
 import Footer from './components/Footer'
-import { saveToDo } from './components/Storage'
+import { saveToDo, delteteFromStores } from './components/Storage'
 import { useState } from 'react'
 
 function App() {
@@ -26,16 +26,18 @@ function App() {
 
     setToDo([...toDo, newToDo])
 
-    console.log(newToDo)
-
     saveToDo({
-      toDo: newToDo
+      toDo: [...toDo, newToDo]
     })
   }
 
   // "handleDeleteCard" es la funcion que se encarga de eliminar un objeto del array
   const handleDeleteCard = id => {
     setToDo(toDo.filter(toDo => toDo.id !== id))
+
+    delteteFromStores({
+      toDo: toDo.filter(toDo => toDo.id !== id)
+    })
   }
 
   return (

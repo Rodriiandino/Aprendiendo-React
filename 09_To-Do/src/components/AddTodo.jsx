@@ -1,11 +1,16 @@
+import { saveIdToDo } from './Storage'
 import { useState } from 'react'
 
 export default function AddTodo({ onAddTodo }) {
-  const [inputValue, setInputValue] = useState({
-    id: 0,
-    title: '',
-    description: '',
-    level: 'low'
+  const [inputValue, setInputValue] = useState(() => {
+    const idFromStores = window.localStorage.getItem('id')
+
+    return {
+      id: idFromStores ? JSON.parse(idFromStores) : 0,
+      title: '',
+      description: '',
+      level: 'low'
+    }
   })
 
   const handleSubmit = e => {
@@ -16,8 +21,15 @@ export default function AddTodo({ onAddTodo }) {
       inputValue.description,
       inputValue.level
     )
+    const idFromStores = window.localStorage.getItem('id')
+    const newId = JSON.parse(idFromStores) + 1
+
+    saveIdToDo({
+      id: newId
+    })
+
     setInputValue({
-      id: inputValue.id + 1,
+      id: newId,
       title: '',
       description: '',
       level: 'low'
