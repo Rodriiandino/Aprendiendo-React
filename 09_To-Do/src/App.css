@@ -1,12 +1,16 @@
 #root {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: 'header' 'main' 'footer';
+  min-height: 100vh;
   max-width: 1280px;
-  height: 100vh;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 2rem 0 2rem;
   text-align: center;
 }
 
 main {
+  grid-area: main;
   display: grid;
   height: max-content;
   grid-template-columns: 40% 60%;
@@ -15,6 +19,7 @@ main {
 }
 
 .title {
+  grid-area: header;
   margin-bottom: 2rem;
   color: #646cff;
 }
@@ -112,6 +117,7 @@ main {
 }
 
 .footer {
+  grid-area: footer;
   position: sticky;
   bottom: 0;
   right: 0;
