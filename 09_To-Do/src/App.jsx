@@ -1,6 +1,6 @@
 import './App.css'
 import AddTodo from './components/AddTodo'
-import CardTodo from './components/cardTodo'
+import CardTodo from './components/CardTodo'
 import Footer from './components/Footer'
 import { saveToDo, delteteFromStores } from './components/Storage'
 import { useState } from 'react'
