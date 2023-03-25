@@ -3,4 +3,6 @@
 Un repositorio donde se encuentra mi aprendizaje de React a lo largo del tiempo.
 
 <h2>🚀 Demo</h2>
-first project with react and vite -> https://tictactoe-rodriiandino.netlify.app
+First project (useState and LocalStorage) -> https://tictactoe-rodriiandino.netlify.app --> Tic-Tac-Toe
+
+Second project (useState and LocalStorage) -> https://to-do-andinorodrigo.netlify.app/ --> To-Do
