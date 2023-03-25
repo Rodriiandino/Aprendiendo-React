@@ -20,7 +20,7 @@ export default function AddTodo({ onAddTodo }) {
       id: inputValue.id + 1,
       title: '',
       description: '',
-      level: ''
+      level: 'low'
     })
   }
 
@@ -29,6 +29,7 @@ export default function AddTodo({ onAddTodo }) {
       <section className='container-form'>
         <form className='card-form' onSubmit={handleSubmit}>
           <label>
+            <span className='date'>Task?</span>
             <input
               type='text'
               value={inputValue.title}
@@ -40,6 +41,7 @@ export default function AddTodo({ onAddTodo }) {
             />
           </label>
           <label>
+            <span className='date'>Description</span>
             <input
               type='text'
               value={inputValue.description}
@@ -47,11 +49,11 @@ export default function AddTodo({ onAddTodo }) {
                 setInputValue({ ...inputValue, description: e.target.value })
               }
               required
-              placeholder='Description'
+              placeholder='Ej: do a to-do'
             />
           </label>
           <label>
-            Level
+            <span className='date'>Level</span>
             <select
               name='combo'
               value={inputValue.level}
@@ -61,7 +63,7 @@ export default function AddTodo({ onAddTodo }) {
             >
               <option value='low'>Low</option>
               <option value='medium'>Medium</option>
-              <option value='hard'>Hard</option>
+              <option value='high'>High</option>
             </select>
           </label>
           <button type='submit'>ToDo</button>

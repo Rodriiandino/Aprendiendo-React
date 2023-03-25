@@ -8,7 +8,7 @@
 
 main {
   display: grid;
-  height: 90%;
+  height: 85%;
   grid-template-columns: 40% 60%;
   grid-template-rows: auto;
   grid-template-areas: 'card-form cards-task';
@@ -16,6 +16,7 @@ main {
 
 .title {
   margin-bottom: 2rem;
+  color: #646cff;
 }
 
 .container-form {
@@ -26,11 +27,37 @@ main {
 }
 
 .card-form {
-  border: 2px solid #fdfdfd;
   width: 300px;
   height: fit-content;
+  border: 2px solid #3d3952;
+  border-radius: 30px;
+  padding: 2rem 1rem;
+  background-color: #252330;
   display: flex;
   flex-direction: column;
+}
+
+.card-form label {
+  padding: 0.8rem;
+}
+
+.card-form input {
+  padding: 0.8rem;
+  border: 2px solid #fdfdfd;
+  border-radius: 10px;
+}
+
+.card-form select {
+  padding: 0.5rem;
+  border: 2px solid #fdfdfd;
+  border-radius: 10px;
+}
+
+.date {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #646cff;
+  padding: 0.5rem;
 }
 
 .container {
@@ -40,7 +67,10 @@ main {
 }
 
 .info {
-  border: 2px solid #fdfdfd;
+  position: relative;
+  border: 2px solid #67608a;
+  background-color: #3d3663;
+  border-radius: 30px;
   width: 300px;
   height: fit-content;
   margin: 1rem;
@@ -52,13 +82,80 @@ main {
 }
 
 .info header {
-  background-color: #7278e0;
+  color: #646cff;
+}
+
+.info header span {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fdfdfd;
+  border-radius: 30px;
+}
+
+.low {
+  background-color: #26923e;
+}
+.medium {
+  background-color: #91c00f;
+}
+.high {
+  background-color: #9b0101;
 }
 
 .info div {
-  background-color: #373ec2;
+  color: #fdfdfd;
 }
 
-.info footer {
-  background-color: #646cff;
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fdfdfd;
+  font-size: 1rem;
+}
+
+.footer a {
+  padding-right: 0.3rem;
+}
+
+.github {
+  margin: 0 auto;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 0.2rem;
+  background-color: #fafafa;
+}
+
+.github:hover {
+  animation: logo-spin 0.5s ease;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  main {
+    height: fit-content;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto;
+    grid-template-areas: 'card-form' 'cards-task';
+  }
+
+  .container {
+    justify-content: center;
+    align-items: center;
+  }
 }
