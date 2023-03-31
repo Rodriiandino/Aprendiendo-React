@@ -1,8 +1,6 @@
 import './App.css'
 import { useEffect, useState } from 'react'
-
-const jsonUser = 'https://jsonplaceholder.typicode.com/users'
-const catFact = 'https://catfact.ninja/fact'
+import { getUsers, getCatFact } from './components/logica'
 
 function App() {
   const [user, setUser] = useState()
@@ -10,29 +8,20 @@ function App() {
 
   useEffect(() => {
     // Se ejecuta cuando se monta el componente
-    fetch(jsonUser) // Se hace fetch de la url
-      .then(res => res.json()) // Se convierte a json
-      .then(
-        (
-          user // Se obtiene el json
-        ) => {
-          const users = user.map(user => <li key={user.id}>{user.username}</li>) // Se mapea el json
-          setUser(users) // Se setea el estado
-        }
-      )
+    getUsers().then(users => setUser(users)) // Se ejecuta la funcion que retorna una promesa y se setea el estado
   }, []) // La dependecia es un array vacio para que solo se ejecute una vez
   // NO OLVIDAR DE COLOCAR DEPENDENCIA!!
 
   // Usando async await
   useEffect(() => {
-    async function getCatFact() {
-      const res = await fetch(catFact)
-      const data = await res.json()
-      const { fact } = data // Se obtiene el dato de la propiedad fact, usando destructuracion
-      setFact(fact)
-    }
-    getCatFact()
+    getCatFact().then(fact => setFact(fact)) // Se ejecuta la funcion que retorna una promesa y se setea el estado
   }, [])
+
+  // Otra fomarma de hacerlo
+  const handleNewFact = async () => {
+    const newFact = await getCatFact() // Se ejecuta la funcion que retorna una promesa y se setea el estado
+    setFact(newFact)
+  }
 
   return (
     <div className='App'>
@@ -43,6 +32,7 @@ function App() {
         </p>
         {user && <ul>{user}</ul>} {/* Se valida que el estado tenga datos */}
         {fact && <p>{fact}</p>}
+        <button onClick={handleNewFact}>New Fact</button>
       </main>
       <p className='read-the-docs'>10_FetchingDeDatos</p>
     </div>
