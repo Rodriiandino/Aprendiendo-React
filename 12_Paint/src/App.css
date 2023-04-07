@@ -1,0 +1,11 @@
+#root {
+  width: 100%;
+  height: 100vh;
+  padding: 2rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+canvas {
+  background-color: #d32424;
+}
