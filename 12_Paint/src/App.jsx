@@ -7,9 +7,7 @@ export default function App() {
   // Si el puntero esta activado o no
   const [enabled, setEnabled] = useState(false)
   // Estado para almacenar el color del pincel
-  const [brushColor, setBrushColor] = useState('#ffffff')
-  // Detecta al cambiar el tamaño de la ventana
-  const [resize, setResize] = useState(window.innerWidth)
+  const [brushColor, setBrushColor] = useState('#000000')
 
   // Referencia al canvas
   const canvasRef = useRef(null)
@@ -18,11 +16,13 @@ export default function App() {
     // Obtenemos el canvas y el contexto
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
-    canvas.width = canvas.offsetWidth
-    canvas.height = canvas.offsetHeight
+
+    // Establecemos el tamaño del canvas
+    canvas.width = canvas.clientWidth
+    canvas.height = canvas.clientHeight
 
     // Obtenemos la posicion del canvas
-    const rect = canvas.getBoundingClientRect()
+    let rect = canvas.getBoundingClientRect()
 
     const handlePointerDown = e => {
       if (!enabled) return
@@ -50,7 +50,9 @@ export default function App() {
     }
 
     const handleResize = () => {
-      setResize(window.innerWidth)
+      canvas.width = canvas.clientWidth
+      canvas.height = canvas.clientHeight
+      rect = canvas.getBoundingClientRect()
     }
 
     window.addEventListener('resize', handleResize)
@@ -63,7 +65,7 @@ export default function App() {
       canvas.removeEventListener('pointermove', handlePointerMove)
       window.removeEventListener('resize', handleResize)
     }
-  }, [enabled, brushColor, resize])
+  }, [enabled, brushColor])
 
   useEffect(() => {
     const handleMove = e => {
@@ -90,38 +92,43 @@ export default function App() {
       <div
         style={{
           position: 'absolute',
+          display: enabled ? 'block' : 'none',
           backgroundColor: `${brushColor}`,
           borderRadius: '50%',
           opacity: 0.6,
           transform: `translate(${position.x}px, ${position.y}px)`,
           pointerEvents: 'none',
-          left: -20,
-          top: -20,
-          width: 40,
-          height: 40
+          left: -5,
+          top: -5,
+          width: 20,
+          height: 20
         }}
       />
+
+      <h1>PAINT</h1>
 
       <canvas
         ref={canvasRef}
         id='canvas'
         style={{
           width: '60%',
-          aspectRatio: '16/9'
+          height: '60%'
         }}
       ></canvas>
 
-      <button onClick={() => setEnabled(!enabled)}>
-        {enabled ? 'Desactivar' : 'Activar'} seguir puntero
-      </button>
+      <div>
+        <button onClick={() => setEnabled(!enabled)}>
+          {enabled ? 'Desactivar' : 'Activar'} seguir puntero
+        </button>
 
-      <button onClick={clearCanvas}>Limpiar canvas</button>
+        <button onClick={clearCanvas}>Limpiar canvas</button>
 
-      <input
-        type='color'
-        value={brushColor}
-        onChange={e => setBrushColor(e.target.value)}
-      />
+        <input
+          type='color'
+          value={brushColor}
+          onChange={e => setBrushColor(e.target.value)}
+        />
+      </div>
     </>
   )
 }
