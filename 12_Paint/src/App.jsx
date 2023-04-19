@@ -1,42 +1,60 @@
 import './App.css'
 import { useRef, useEffect, useState } from 'react'
 
-export default function App() {
-  // Posicion del puntero
-  const [position, setPosition] = useState({ x: 0, y: 0 })
-  // Si el puntero esta activado o no
-  const [enabled, setEnabled] = useState(false)
-  // Estado para almacenar el color del pincel
-  const [brushColor, setBrushColor] = useState('#000000')
+const DEFAULT_BRUSH_COLOR = '#000000'
+const BRUSH_SIZE = 10
 
-  // Referencia al canvas
+export default function App() {
   const canvasRef = useRef(null)
+  const [enabled, setEnabled] = useState(false)
+  const [brushColor, setBrushColor] = useState(DEFAULT_BRUSH_COLOR)
+  const [pointerPosition, setPointerPosition] = useState({ x: 0, y: 0 })
+  const [canvasContent, setCanvasContent] = useState(null)
 
   useEffect(() => {
-    // Obtenemos el canvas y el contexto
+    const canvas = canvasRef.current
+
+    // Tamaño del canvas igual al tamaño del contenedor
+    canvas.width = canvas.clientWidth
+    canvas.height = canvas.clientHeight
+  }, [])
+
+  useEffect(() => {
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
 
-    // Establecemos el tamaño del canvas
-    canvas.width = canvas.clientWidth
-    canvas.height = canvas.clientHeight
+    const handleResize = () => {
+      // actualizar el tamaño del canvas
+      canvas.width = canvas.clientWidth
+      canvas.height = canvas.clientHeight
 
-    // Obtenemos la posicion del canvas
-    let rect = canvas.getBoundingClientRect()
+      // Redibujar el canvas
+      const img = new Image()
+      img.onload = () => {
+        context.drawImage(img, 0, 0)
+      }
+      img.src = canvasContent
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [canvasContent])
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const context = canvas.getContext('2d')
 
     const handlePointerDown = e => {
       if (!enabled) return
 
-      // Empezamos un nuevo path
+      const rect = canvas.getBoundingClientRect()
       context.beginPath()
-
-      // Establecemos el color del pincel
       context.strokeStyle = brushColor
-
-      // Movemos el puntero a la posicion del puntero
       context.moveTo(e.clientX - rect.left, e.clientY - rect.top)
-
-      context.lineWidth = 10
+      context.lineWidth = BRUSH_SIZE
       context.lineCap = 'round'
       context.lineJoin = 'round'
     }
@@ -44,32 +62,29 @@ export default function App() {
     const handlePointerMove = e => {
       if (!enabled || e.buttons !== 1) return
 
-      // Dibujamos una linea desde la posicion anterior hasta la nueva
+      const rect = canvas.getBoundingClientRect()
       context.lineTo(e.clientX - rect.left, e.clientY - rect.top)
       context.stroke()
     }
 
-    const handleResize = () => {
-      canvas.width = canvas.clientWidth
-      canvas.height = canvas.clientHeight
-      rect = canvas.getBoundingClientRect()
+    const handlePointerUp = () => {
+      setCanvasContent(canvas.toDataURL())
     }
 
-    window.addEventListener('resize', handleResize)
     canvas.addEventListener('pointerdown', handlePointerDown)
     canvas.addEventListener('pointermove', handlePointerMove)
+    canvas.addEventListener('pointerup', handlePointerUp)
 
-    // Limpiamos los eventos al desmontar el componente
     return () => {
       canvas.removeEventListener('pointerdown', handlePointerDown)
       canvas.removeEventListener('pointermove', handlePointerMove)
-      window.removeEventListener('resize', handleResize)
+      canvas.removeEventListener('pointerup', handlePointerUp)
     }
   }, [enabled, brushColor])
 
   useEffect(() => {
     const handleMove = e => {
-      setPosition({ x: e.clientX, y: e.clientY })
+      setPointerPosition({ x: e.clientX, y: e.clientY })
     }
 
     if (enabled) {
@@ -85,25 +100,27 @@ export default function App() {
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
     context.clearRect(0, 0, canvas.width, canvas.height)
+    setCanvasContent(null)
   }
 
   return (
     <>
-      <div
-        style={{
-          position: 'absolute',
-          display: enabled ? 'block' : 'none',
-          backgroundColor: `${brushColor}`,
-          borderRadius: '50%',
-          opacity: 0.6,
-          transform: `translate(${position.x}px, ${position.y}px)`,
-          pointerEvents: 'none',
-          left: -5,
-          top: -5,
-          width: 20,
-          height: 20
-        }}
-      />
+      {enabled && (
+        <div
+          style={{
+            position: 'absolute',
+            backgroundColor: brushColor,
+            borderRadius: '50%',
+            opacity: 0.6,
+            transform: `translate(${pointerPosition.x}px, ${pointerPosition.y}px)`,
+            pointerEvents: 'none',
+            left: -BRUSH_SIZE / 2,
+            top: -BRUSH_SIZE / 2,
+            width: BRUSH_SIZE,
+            height: BRUSH_SIZE
+          }}
+        />
+      )}
 
       <h1>PAINT</h1>
 
@@ -114,8 +131,7 @@ export default function App() {
           width: '60%',
           height: '60%'
         }}
-      ></canvas>
-
+      />
       <div>
         <button onClick={() => setEnabled(!enabled)}>
           {enabled ? 'Desactivar' : 'Activar'} seguir puntero
