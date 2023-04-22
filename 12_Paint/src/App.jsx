@@ -1,8 +1,12 @@
 import './App.css'
 import { useRef, useEffect, useState } from 'react'
+import Guide from './components/Guide'
+import Canvas from './components/Canvas'
+import Options from './components/Options'
+import Footer from './components/Footer'
 
 const DEFAULT_BRUSH_COLOR = '#000000'
-const BRUSH_SIZE = 10
+const DEFAULT_BRUSH_SIZE = 10
 
 export default function App() {
   const canvasRef = useRef(null)
@@ -10,6 +14,8 @@ export default function App() {
   const [brushColor, setBrushColor] = useState(DEFAULT_BRUSH_COLOR)
   const [pointerPosition, setPointerPosition] = useState({ x: 0, y: 0 })
   const [canvasContent, setCanvasContent] = useState(null)
+  const [brushSize, setBrushSize] = useState(DEFAULT_BRUSH_SIZE)
+  const [screenResize, setScreenResize] = useState(window.innerWidth)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -27,6 +33,8 @@ export default function App() {
       // actualizar el tamaño del canvas
       canvas.width = canvas.clientWidth
       canvas.height = canvas.clientHeight
+
+      setScreenResize(window.innerWidth)
 
       // Redibujar el canvas
       const img = new Image()
@@ -46,15 +54,15 @@ export default function App() {
   useEffect(() => {
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
+    const rect = canvas.getBoundingClientRect()
 
     const handlePointerDown = e => {
       if (!enabled) return
 
-      const rect = canvas.getBoundingClientRect()
       context.beginPath()
       context.strokeStyle = brushColor
       context.moveTo(e.clientX - rect.left, e.clientY - rect.top)
-      context.lineWidth = BRUSH_SIZE
+      context.lineWidth = brushSize
       context.lineCap = 'round'
       context.lineJoin = 'round'
     }
@@ -62,7 +70,6 @@ export default function App() {
     const handlePointerMove = e => {
       if (!enabled || e.buttons !== 1) return
 
-      const rect = canvas.getBoundingClientRect()
       context.lineTo(e.clientX - rect.left, e.clientY - rect.top)
       context.stroke()
     }
@@ -80,7 +87,7 @@ export default function App() {
       canvas.removeEventListener('pointermove', handlePointerMove)
       canvas.removeEventListener('pointerup', handlePointerUp)
     }
-  }, [enabled, brushColor])
+  }, [enabled, brushColor, brushSize, screenResize])
 
   useEffect(() => {
     const handleMove = e => {
@@ -96,55 +103,31 @@ export default function App() {
     }
   }, [enabled])
 
-  const clearCanvas = () => {
-    const canvas = canvasRef.current
-    const context = canvas.getContext('2d')
-    context.clearRect(0, 0, canvas.width, canvas.height)
-    setCanvasContent(null)
-  }
-
   return (
     <>
-      {enabled && (
-        <div
-          style={{
-            position: 'absolute',
-            backgroundColor: brushColor,
-            borderRadius: '50%',
-            opacity: 0.6,
-            transform: `translate(${pointerPosition.x}px, ${pointerPosition.y}px)`,
-            pointerEvents: 'none',
-            left: -BRUSH_SIZE / 2,
-            top: -BRUSH_SIZE / 2,
-            width: BRUSH_SIZE,
-            height: BRUSH_SIZE
-          }}
-        />
-      )}
-
       <h1>PAINT</h1>
 
-      <canvas
-        ref={canvasRef}
-        id='canvas'
-        style={{
-          width: '60%',
-          height: '60%'
-        }}
+      <Guide
+        enabled={enabled}
+        brushColor={brushColor}
+        pointerPosition={pointerPosition}
+        brushSize={brushSize}
       />
-      <div>
-        <button onClick={() => setEnabled(!enabled)}>
-          {enabled ? 'Desactivar' : 'Activar'} seguir puntero
-        </button>
 
-        <button onClick={clearCanvas}>Limpiar canvas</button>
+      <Canvas canvasRef={canvasRef} />
 
-        <input
-          type='color'
-          value={brushColor}
-          onChange={e => setBrushColor(e.target.value)}
-        />
-      </div>
+      <Options
+        setEnabled={setEnabled}
+        enabled={enabled}
+        canvasRef={canvasRef}
+        setCanvasContent={setCanvasContent}
+        brushColor={brushColor}
+        setBrushColor={setBrushColor}
+        brushSize={brushSize}
+        setBrushSize={setBrushSize}
+      />
+
+      <Footer />
     </>
   )
 }
