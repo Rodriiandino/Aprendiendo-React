@@ -1,0 +1,75 @@
+header {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  margin-top: 1.5rem;
+}
+
+ul {
+  margin: 0 auto;
+  width: 70%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 1rem;
+}
+
+li {
+  list-style: none;
+  background-color: #242424;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 0 0.5rem #242424;
+}
+
+.footer {
+  grid-area: footer;
+  position: sticky;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #242424;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fdfdfd;
+  font-size: 1rem;
+}
+
+.footer a {
+  padding-right: 0.3rem;
+}
+
+.github {
+  margin: 0 auto;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 0.2rem;
+  background-color: #fafafa;
+}
+
+.github:hover {
+  animation: logo-spin 0.5s ease;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
