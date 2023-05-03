@@ -1,29 +1,25 @@
 import './App.css'
-import { useEffect, useState } from 'react'
-import mocksResponse from './mocks/success.json'
+import { usePlants } from './components/Hooks/usePlants'
 import { Plants } from './components/Plants'
 import Footer from './components/Footer'
 
 function App() {
-  const KEY_PLANT = '9Rt6BMZNiG_JKQKJV8a_pGQglKYQxY1ZZQ-X1cRvjhw'
-  const [search, setsearch] = useState('')
-  const [error, seterror] = useState(null)
-  const plants = mocksResponse.data
-
-  // "?"" significa que si plants es null o undefined, no se rompa el codigo
+  const {
+    plants,
+    error,
+    loading,
+    search,
+    setSearch,
+    page,
+    nextPage,
+    prevPage,
+    totalResults,
+    reset
+  } = usePlants()
 
   const handleClick = e => {
     e.preventDefault()
-    console.log(search)
   }
-
-  useEffect(() => {
-    if (search === '') {
-      seterror('Debes ingresar un valor')
-      return
-    }
-    seterror(null)
-  }, [search])
 
   return (
     <>
@@ -35,14 +31,25 @@ function App() {
             style={{ border: error ? '1px solid red' : 'none' }}
             type='search'
             value={search}
-            onChange={e => setsearch(e.target.value)}
+            onChange={e => setSearch(e.target.value)}
             placeholder='sunflower, nacar...'
           />
           <button type='submit'>Buscar</button>
+          <button type='button' onClick={reset}>
+            {' '}
+            Resetear{' '}
+          </button>
         </form>
       </header>
       <main>
+        <p>Resultados: {totalResults}</p>
+        {loading ? <p>Cargando...</p> : null}
         <Plants plants={plants} />
+        <div>
+          {' '}
+          <button onClick={prevPage}>Pagina Anterior</button> {page}{' '}
+          <button onClick={nextPage}>Siguiente Pagina</button>
+        </div>
       </main>
 
       <Footer />
