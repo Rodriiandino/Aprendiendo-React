@@ -14,18 +14,20 @@ function App() {
     nextPage,
     prevPage,
     totalResults,
-    reset
+    reset,
+    fetchPlants
   } = usePlants()
 
-  const handleClick = e => {
-    e.preventDefault()
+  const handleSearch = event => {
+    event.preventDefault()
+    fetchPlants()
   }
 
   return (
     <>
       <header>
         <h1>Buscador de Plantas</h1>
-        <form onClick={handleClick}>
+        <form className='form' onClick={handleSearch}>
           {error ? <p style={{ color: 'red' }}>{error}</p> : null}
           <input
             style={{ border: error ? '1px solid red' : 'none' }}
@@ -42,13 +44,18 @@ function App() {
         </form>
       </header>
       <main>
-        <p>Resultados: {totalResults}</p>
-        {loading ? <p>Cargando...</p> : null}
+        <p className='results'>Resultados: {totalResults}</p>
+        {loading ? <p className='results'>Cargando...</p> : null}
         <Plants plants={plants} />
-        <div>
+        <div className='btn__container'>
           {' '}
-          <button onClick={prevPage}>Pagina Anterior</button> {page}{' '}
-          <button onClick={nextPage}>Siguiente Pagina</button>
+          <button className='btn' onClick={prevPage}>
+            Pagina Anterior
+          </button>{' '}
+          <h3>{page} </h3>
+          <button className='btn' onClick={nextPage}>
+            Siguiente Pagina
+          </button>
         </div>
       </main>
 

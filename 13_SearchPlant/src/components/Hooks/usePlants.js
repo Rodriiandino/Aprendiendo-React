@@ -9,31 +9,37 @@ export function usePlants() {
   const [totalPages, setTotalPages] = useState(0)
   const [totalResults, setTotalResults] = useState(0)
 
-  const firsInput = useRef(true) // useRef es un hook que permite guardar valores entre renderizados
-
-  const KEY_PLANT = ''
+  // useRef es un hook que permite guardar valores entre renderizados
+  const previusSearch = useRef(search)
+  const previusPage = useRef(page)
+  const firsInput = useRef(true)
 
   const fetchPlants = async () => {
+    if (search === previusSearch.current && page === previusPage.current) return
     try {
       setLoading(true)
-      const url = `https://trefle.io/api/v1/plants?token=${KEY_PLANT}&page=${page}&q=${search}`
+      previusSearch.current = search
+      const url = `http://localhost:3000/plants?page=${page}&search=${search}`
       const response = await fetch(url)
+
+      // Verificar si la respuesta es JSON
+      const contentType = response.headers.get('content-type')
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('No se recibió una respuesta JSON válida')
+      }
+
       const data = await response.json()
       setLoading(false)
 
-      if (data.error) {
-        setError(data.error)
-        return
-      }
+      setPlants(data.data)
+      previusPage.current = page
+      setTotalPages(data.meta.total_pages)
+      setTotalResults(data.meta.total)
     } catch (e) {
-      setError(e.message)
+      setError('Debes ingresar un valor')
     } finally {
       setLoading(false)
     }
-
-    setPlants(data.data)
-    setTotalPages(data.meta.total_pages)
-    setTotalResults(data.meta.total)
   }
 
   useEffect(() => {
@@ -46,12 +52,13 @@ export function usePlants() {
       setError('Debes ingresar un valor')
       return
     }
+
     setError(null)
   }, [search])
 
   useEffect(() => {
     fetchPlants()
-  }, [search, page])
+  }, [page])
 
   const nextPage = () => {
     if (page === totalPages) return

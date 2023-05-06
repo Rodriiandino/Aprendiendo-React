@@ -6,8 +6,17 @@ header {
   align-items: center;
 }
 
+.form * {
+  margin: 0.5rem;
+}
+
 main {
   margin-top: 1.5rem;
+}
+
+.results {
+  text-align: center;
+  font-size: 1.3rem;
 }
 
 ul {
@@ -16,6 +25,8 @@ ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 1rem;
+  padding: 0;
+  padding-bottom: 140px;
 }
 
 li {
@@ -32,11 +43,9 @@ li {
 }
 
 .footer {
-  grid-area: footer;
-  position: sticky;
+  width: 100%;
+  position: fixed;
   bottom: 0;
-  right: 0;
-  left: 0;
   background-color: #242424;
   display: flex;
   justify-content: center;
@@ -72,4 +81,21 @@ li {
   to {
     transform: rotate(360deg);
   }
+}
+
+.btn__container {
+  width: 100%;
+  position: fixed;
+  bottom: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn__container h3 {
+  margin: 1rem;
+}
+
+.btn {
+  padding: 1rem;
 }

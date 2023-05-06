@@ -16,7 +16,7 @@ function PlantsList({ plants }) {
 }
 
 function NoPlants() {
-  return <p>No hay plantas</p>
+  return <p className='results'>No hay plantas</p>
 }
 
 export function Plants({ plants }) {
