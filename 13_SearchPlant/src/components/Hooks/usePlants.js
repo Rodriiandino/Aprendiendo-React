@@ -19,7 +19,8 @@ export function usePlants() {
     try {
       setLoading(true)
       previusSearch.current = search
-      const url = `http://localhost:3000/plants?page=${page}&search=${search}`
+      const url = `https://aprendiendo-react-production.up.railway.app/plants?page=${page}&search=${search}`
+
       const response = await fetch(url)
 
       // Verificar si la respuesta es JSON
