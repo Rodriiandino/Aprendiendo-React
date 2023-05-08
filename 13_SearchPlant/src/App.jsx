@@ -1,27 +1,35 @@
 import './App.css'
 import { usePlants } from './components/Hooks/usePlants'
+import { useSearch } from './components/Hooks/useSearch'
 import { Plants } from './components/Plants'
 import Footer from './components/Footer'
 
 function App() {
+  const { search, setSearch, error, setError } = useSearch()
+
   const {
     plants,
-    error,
     loading,
-    search,
-    setSearch,
     page,
     nextPage,
     prevPage,
     totalResults,
     reset,
-    fetchPlants
-  } = usePlants()
+    fetchPlants,
+    enable
+  } = usePlants({ search, setError, setSearch })
 
   const handleSearch = event => {
     event.preventDefault()
-    fetchPlants()
+    fetchPlants({ search })
   }
+
+  const handleChange = event => {
+    const newSearch = event.target.value
+    setSearch(newSearch)
+  }
+
+  console.log('hola')
 
   return (
     <>
@@ -33,7 +41,7 @@ function App() {
             style={{ border: error ? '1px solid red' : 'none' }}
             type='search'
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={handleChange}
             placeholder='sunflower, nacar...'
           />
           <button type='submit'>Buscar</button>
@@ -49,11 +57,11 @@ function App() {
         <Plants plants={plants} />
         <div className='btn__container'>
           {' '}
-          <button className='btn' onClick={prevPage}>
+          <button className='btn' onClick={prevPage} disabled={enable}>
             Pagina Anterior
           </button>{' '}
           <h3>{page} </h3>
-          <button className='btn' onClick={nextPage}>
+          <button className='btn' onClick={nextPage} disabled={enable}>
             Siguiente Pagina
           </button>
         </div>
