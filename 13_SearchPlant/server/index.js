@@ -1,12 +1,13 @@
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const fetch = (...args) =>
   import('node-fetch').then(({ default: fetch }) => fetch(...args))
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
-const KEY_PLANT = '9Rt6BMZNiG_JKQKJV8a_pGQglKYQxY1ZZQ-X1cRvjhw'
+const KEY_PLANT = process.env.KEY_PLANT
 
 app.use(cors()) // Agregar el middleware cors
 

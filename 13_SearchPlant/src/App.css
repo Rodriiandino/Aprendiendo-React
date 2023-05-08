@@ -94,6 +94,10 @@ li {
 
 .btn__container h3 {
   margin: 1rem;
+  font-size: 2rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #f33;
+  text-shadow: 0 0 0.5rem #f33;
 }
 
 .btn {
