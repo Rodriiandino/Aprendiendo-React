@@ -12,6 +12,7 @@ export function usePlants({ setError, search, setSearch }) {
   const previusSearch = useRef(search)
   const previusPage = useRef(page)
 
+  // useCallback es un hook que permite memorizar una función
   const fetchPlants = useCallback(
     async ({ search }) => {
       if (search === previusSearch.current && page === previusPage.current)
@@ -62,6 +63,7 @@ export function usePlants({ setError, search, setSearch }) {
   }
 
   const reset = () => {
+    setEnable(true)
     setPlants([])
     setError(null)
     setLoading(false)

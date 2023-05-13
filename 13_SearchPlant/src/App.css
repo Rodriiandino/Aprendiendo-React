@@ -6,6 +6,12 @@ header {
   align-items: center;
 }
 
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .form * {
   margin: 0.5rem;
 }
@@ -102,4 +108,13 @@ li {
 
 .btn {
   padding: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .form {
+    flex-direction: column;
+  }
+  ul {
+    width: 90%;
+  }
 }

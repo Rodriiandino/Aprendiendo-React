@@ -29,21 +29,23 @@ function App() {
     setSearch(newSearch)
   }
 
-  console.log('hola')
-
   return (
     <>
       <header>
         <h1>Buscador de Plantas</h1>
         <form className='form' onClick={handleSearch}>
           {error ? <p style={{ color: 'red' }}>{error}</p> : null}
-          <input
-            style={{ border: error ? '1px solid red' : 'none' }}
-            type='search'
-            value={search}
-            onChange={handleChange}
-            placeholder='sunflower, nacar...'
-          />
+          <label>
+            Buscar:
+            <input
+              style={{ border: error ? '1px solid red' : 'none' }}
+              type='search'
+              value={search}
+              onChange={handleChange}
+              placeholder='sunflower, nacar...'
+            />
+          </label>
+
           <button type='submit'>Buscar</button>
           <button type='button' onClick={reset}>
             {' '}
