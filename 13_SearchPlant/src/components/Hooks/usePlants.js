@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 
-export function usePlants({ setError, search, setSearch }) {
+export function usePlants({ setError, search, setSearch, sort }) {
   const [plants, setPlants] = useState([])
   const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(1)
@@ -12,7 +12,7 @@ export function usePlants({ setError, search, setSearch }) {
   const previusSearch = useRef(search)
   const previusPage = useRef(page)
 
-  // useCallback es un hook que permite memorizar una función
+  // useCallback es un hook que permite memorizar una función y evitar que se cree en cada renderizado
   const fetchPlants = useCallback(
     async ({ search }) => {
       if (search === previusSearch.current && page === previusPage.current)
@@ -62,6 +62,11 @@ export function usePlants({ setError, search, setSearch }) {
     setPage(page - 1)
   }
 
+  // useMemo es un hook que permite memorizar un valor y evitar que se calcule en cada renderizado
+  const sortPlants = useMemo(() => {
+    return sort ? [...plants].sort((a, b) => a.year - b.year) : plants
+  }, [plants, sort])
+
   const reset = () => {
     setEnable(true)
     setPlants([])
@@ -74,7 +79,7 @@ export function usePlants({ setError, search, setSearch }) {
   }
 
   return {
-    plants,
+    plants: sortPlants,
     loading,
     page,
     nextPage,
