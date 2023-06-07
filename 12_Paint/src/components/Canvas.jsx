@@ -1,11 +1,11 @@
-export default function Canvas({ canvasRef }) {
+export default function Canvas({ canvasRef, screenSize }) {
   return (
     <>
       <canvas
         ref={canvasRef}
         id='canvas'
         style={{
-          width: '60%',
+          width: screenSize,
           height: '60%'
         }}
       />

@@ -5,7 +5,15 @@ import Options from './components/Options'
 import Footer from './components/Footer'
 import useCanvas from './components/hook/useCanvas'
 
+import { useState } from 'react'
+
 export default function App() {
+  const [screenSize, SetscreenSize] = useState(0)
+
+  const handleSizeChange = size => {
+    SetscreenSize(size)
+  }
+
   const {
     canvasRef,
     setCanvasContent,
@@ -13,23 +21,36 @@ export default function App() {
     setEnabled,
     brushColor,
     setBrushColor,
-    pointerPosition,
     brushSize,
     setBrushSize
-  } = useCanvas()
+  } = useCanvas({ screenSize })
 
   return (
     <>
-      <h1>PAINT</h1>
+      <header>
+        <h1>PAINT</h1>
 
-      <Guide
-        enabled={enabled}
-        brushColor={brushColor}
-        pointerPosition={pointerPosition}
-        brushSize={brushSize}
-      />
+        <div>
+          <ul>
+            <li>
+              <button onClick={() => handleSizeChange('1200px')}>1200px</button>
+            </li>
+            <li>
+              <button onClick={() => handleSizeChange('900px')}>900px</button>
+            </li>
+            <li>
+              <button onClick={() => handleSizeChange('600px')}>600px</button>
+            </li>
+            <li>
+              <button onClick={() => handleSizeChange('300px')}>300px</button>
+            </li>
+          </ul>
+        </div>
+      </header>
 
-      <Canvas canvasRef={canvasRef} />
+      <Guide enabled={enabled} brushColor={brushColor} brushSize={brushSize} />
+
+      <Canvas canvasRef={canvasRef} screenSize={screenSize} />
 
       <Options
         setEnabled={setEnabled}

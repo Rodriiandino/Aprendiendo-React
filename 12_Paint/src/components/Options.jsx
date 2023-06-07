@@ -14,7 +14,7 @@ export default function Options({
     <>
       <div className='options'>
         <button onClick={() => setEnabled(!enabled)}>
-          {enabled ? 'Desactivar' : 'Activar'} seguir puntero
+          {enabled ? 'Desactivar' : 'Activar'} puntero
         </button>
 
         <ClearCanvas
