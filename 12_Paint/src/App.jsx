@@ -29,9 +29,8 @@ export default function App() {
     <>
       <header>
         <h1>PAINT</h1>
-
         <div>
-          <ul>
+          <ul className='canvas__sizes'>
             <li>
               <button onClick={() => handleSizeChange('1200px')}>1200px</button>
             </li>

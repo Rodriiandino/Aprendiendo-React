@@ -1,14 +1,16 @@
 export default function Canvas({ canvasRef, screenSize }) {
   return (
     <>
-      <canvas
-        ref={canvasRef}
-        id='canvas'
-        style={{
-          width: screenSize,
-          height: '60%'
-        }}
-      />
+      <div className='canvas__conteiner'>
+        <canvas
+          ref={canvasRef}
+          id='canvas'
+          style={{
+            width: screenSize,
+            height: '500px'
+          }}
+        />
+      </div>
     </>
   )
 }

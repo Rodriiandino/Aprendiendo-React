@@ -54,12 +54,21 @@ export default function useCanvas({ screenSize }) {
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
 
+    const isMobileDevice = /Mobi/i.test(navigator.userAgent)
+
     const handlePointerDown = e => {
       if (!enabled) return
 
       const canvasRect = canvas.getBoundingClientRect()
-      const offsetX = e.clientX - canvasRect.left
-      const offsetY = e.clientY - canvasRect.top
+      let offsetX, offsetY
+
+      if (isMobileDevice) {
+        offsetX = e.touches[0].clientX - canvasRect.left
+        offsetY = e.touches[0].clientY - canvasRect.top
+      } else {
+        offsetX = e.clientX - canvasRect.left
+        offsetY = e.clientY - canvasRect.top
+      }
 
       context.beginPath()
       context.strokeStyle = brushColor
@@ -70,11 +79,22 @@ export default function useCanvas({ screenSize }) {
     }
 
     const handlePointerMove = e => {
-      if (!enabled || e.buttons !== 1) return
+      if (isMobileDevice) {
+        if (e.touches.length !== 1 || !enabled) return
+      } else {
+        if (e.buttons !== 1 || !enabled) return
+      }
 
       const canvasRect = canvas.getBoundingClientRect()
-      const offsetX = e.clientX - canvasRect.left
-      const offsetY = e.clientY - canvasRect.top
+      let offsetX, offsetY
+
+      if (isMobileDevice) {
+        offsetX = e.touches[0].clientX - canvasRect.left
+        offsetY = e.touches[0].clientY - canvasRect.top
+      } else {
+        offsetX = e.clientX - canvasRect.left
+        offsetY = e.clientY - canvasRect.top
+      }
 
       context.lineTo(offsetX, offsetY)
       context.stroke()
@@ -84,14 +104,26 @@ export default function useCanvas({ screenSize }) {
       setCanvasContent(canvas.toDataURL())
     }
 
-    canvas.addEventListener('pointerdown', handlePointerDown)
-    canvas.addEventListener('pointermove', handlePointerMove)
-    canvas.addEventListener('pointerup', handlePointerUp)
+    if (isMobileDevice) {
+      canvas.addEventListener('touchstart', handlePointerDown)
+      canvas.addEventListener('touchmove', handlePointerMove)
+      canvas.addEventListener('touchend', handlePointerUp)
+    } else {
+      canvas.addEventListener('mousedown', handlePointerDown)
+      canvas.addEventListener('mousemove', handlePointerMove)
+      canvas.addEventListener('mouseup', handlePointerUp)
+    }
 
     return () => {
-      canvas.removeEventListener('pointerdown', handlePointerDown)
-      canvas.removeEventListener('pointermove', handlePointerMove)
-      canvas.removeEventListener('pointerup', handlePointerUp)
+      if (isMobileDevice) {
+        canvas.removeEventListener('touchstart', handlePointerDown)
+        canvas.removeEventListener('touchmove', handlePointerMove)
+        canvas.removeEventListener('touchend', handlePointerUp)
+      } else {
+        canvas.removeEventListener('mousedown', handlePointerDown)
+        canvas.removeEventListener('mousemove', handlePointerMove)
+        canvas.removeEventListener('mouseup', handlePointerUp)
+      }
     }
   }, [enabled, brushColor, brushSize])
 
