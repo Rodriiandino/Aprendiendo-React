@@ -1,5 +1,6 @@
 import './App.css'
 import Guide from './components/Guide'
+import CanvasSizes from './components/CanvasSizes'
 import Canvas from './components/Canvas'
 import Options from './components/Options'
 import Footer from './components/Footer'
@@ -10,9 +11,7 @@ import { useState } from 'react'
 export default function App() {
   const [screenSize, SetscreenSize] = useState(0)
 
-  const handleSizeChange = size => {
-    SetscreenSize(size)
-  }
+  const isMobileDevice = /Mobi/i.test(navigator.userAgent)
 
   const {
     canvasRef,
@@ -29,27 +28,25 @@ export default function App() {
     <>
       <header>
         <h1>PAINT</h1>
-        <div>
-          <ul className='canvas__sizes'>
-            <li>
-              <button onClick={() => handleSizeChange('1200px')}>1200px</button>
-            </li>
-            <li>
-              <button onClick={() => handleSizeChange('900px')}>900px</button>
-            </li>
-            <li>
-              <button onClick={() => handleSizeChange('600px')}>600px</button>
-            </li>
-            <li>
-              <button onClick={() => handleSizeChange('300px')}>300px</button>
-            </li>
-          </ul>
-        </div>
+        {isMobileDevice ? (
+          <p>Mobile device detected, canvas size is 100%.</p>
+        ) : (
+          <CanvasSizes SetscreenSize={SetscreenSize} />
+        )}
       </header>
 
-      <Guide enabled={enabled} brushColor={brushColor} brushSize={brushSize} />
+      {!isMobileDevice && (
+        <Guide
+          enabled={enabled}
+          brushColor={brushColor}
+          brushSize={brushSize}
+        />
+      )}
 
-      <Canvas canvasRef={canvasRef} screenSize={screenSize} />
+      <Canvas
+        canvasRef={canvasRef}
+        screenSize={isMobileDevice ? '100%' : screenSize}
+      />
 
       <Options
         setEnabled={setEnabled}

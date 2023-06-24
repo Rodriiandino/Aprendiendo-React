@@ -7,7 +7,7 @@ export default function Canvas({ canvasRef, screenSize }) {
           id='canvas'
           style={{
             width: screenSize,
-            height: '500px'
+            height: '98%'
           }}
         />
       </div>
