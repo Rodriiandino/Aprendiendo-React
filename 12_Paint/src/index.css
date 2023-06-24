@@ -44,3 +44,14 @@ button {
 button:hover {
   border-color: #646cff;
 }
+
+@media screen and (max-width: 540px) {
+  h1 {
+    font-size: 1.5em;
+    margin: 1rem 0;
+  }
+
+  button {
+    font-size: 0.8em;
+  }
+}
