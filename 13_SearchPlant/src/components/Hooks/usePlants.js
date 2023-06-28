@@ -21,8 +21,13 @@ export function usePlants({ setError, search, setSearch, sort }) {
         setLoading(true)
         setEnable(false)
         previusSearch.current = search
-        const url = `https://aprendiendo-react-production.up.railway.app/plants?page=${page}&search=${search}`
 
+        let url = ''
+        if (window.location.hostname === 'localhost') {
+          url = `http://localhost:3000/plants?page=${page}&search=${search}`
+        } else {
+          url = `https://search-plants.onrender.com/plants?page=${page}&search=${search}`
+        }
         const response = await fetch(url)
 
         // Verificar si la respuesta es JSON

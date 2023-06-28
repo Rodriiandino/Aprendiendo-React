@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000
 
 const KEY_PLANT = process.env.KEY_PLANT
 
-app.use(cors()) // Agregar el middleware cors
+app.use(cors())
 
 app.get('/plants', async (req, res) => {
   try {
@@ -17,8 +17,7 @@ app.get('/plants', async (req, res) => {
     const search = req.query.search || ''
     const url = `https://trefle.io/api/v1/plants/search?token=${KEY_PLANT}&page=${page}&q=${search}`
     const response = await fetch(url)
-    console.log(url)
-    // Verificar si la respuesta es JSON
+
     const contentType = response.headers.get('content-type')
     if (!contentType || !contentType.includes('application/json')) {
       throw new Error('No se recibió una respuesta JSON válida')
