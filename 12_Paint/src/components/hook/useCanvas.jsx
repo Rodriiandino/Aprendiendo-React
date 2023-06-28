@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 
+const isMobileDevice = /Mobi/i.test(navigator.userAgent)
 const DEFAULT_BRUSH_COLOR = '#000000'
-const DEFAULT_BRUSH_SIZE = 10
+const DEFAULT_BRUSH_SIZE = isMobileDevice ? 5 : 10
 
 export default function useCanvas({ screenSize }) {
   const canvasRef = useRef(null)
@@ -54,9 +55,9 @@ export default function useCanvas({ screenSize }) {
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
 
-    const isMobileDevice = /Mobi/i.test(navigator.userAgent)
-
     const handlePointerDown = e => {
+      e.preventDefault()
+
       if (!enabled) return
 
       const canvasRect = canvas.getBoundingClientRect()
@@ -79,6 +80,8 @@ export default function useCanvas({ screenSize }) {
     }
 
     const handlePointerMove = e => {
+      e.preventDefault()
+
       if (isMobileDevice) {
         if (e.touches.length !== 1 || !enabled) return
       } else {
