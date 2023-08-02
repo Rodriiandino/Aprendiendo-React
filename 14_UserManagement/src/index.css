@@ -1,0 +1,31 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  --black: #272829;
+  --gray-dark: #61677a;
+  --gray: #d8d9da;
+  --yellow: #fff6e0;
+  --white: #ffffff;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--gray-dark);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
