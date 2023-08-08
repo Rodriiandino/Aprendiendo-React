@@ -1,9 +1,11 @@
 import './App.css'
 import { useState } from 'react'
+import AddUser from './components/AddUser'
 import Footer from './components/Footer'
 
 function App() {
   const [showModal, setShowModal] = useState(false)
+  const [users, setUsers] = useState([])
 
   const handleShowModal = () => {
     setShowModal(true)
@@ -11,6 +13,69 @@ function App() {
 
   const handleCloseModal = () => {
     setShowModal(false)
+  }
+
+  const handleAddUser = (id, name, email, role) => {
+    const newUser = {
+      id,
+      name,
+      email,
+      role
+    }
+
+    setUsers([...users, newUser])
+    setShowModal(false)
+  }
+
+  const handleDeleteUser = id => {
+    const newUsers = users.filter(user => user.id !== id)
+    setUsers(newUsers)
+  }
+
+  const handleEditUser = id => {
+    const newUsers = users.map(user => {
+      if (user.id === id) {
+        return {
+          ...user,
+          name: 'new name',
+          email: 'new email',
+          role: 'new role'
+        }
+      }
+      return user
+    })
+    setUsers(newUsers)
+  }
+
+  const showUsers = () => {
+    return users.map(user => {
+      const { id, name, email, role } = user
+      return (
+        <tr key={id}>
+          <td>
+            <span>
+              <label htmlFor='select'></label>
+              <input type='checkbox' id='select' />
+            </span>
+          </td>
+          <td>{id}</td>
+          <td>{name}</td>
+          <td>{email}</td>
+          <td>{role}</td>
+          <td>
+            <button onClick={() => handleEditUser(id)} className='btn__edit'>
+              Edit
+            </button>
+            <button
+              onClick={() => handleDeleteUser(id)}
+              className='btn__delete'
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      )
+    })
   }
 
   return (
@@ -41,7 +106,15 @@ function App() {
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                {users.length > 0 ? (
+                  showUsers()
+                ) : (
+                  <tr>
+                    <td colSpan='6'>No Users</td>
+                  </tr>
+                )}
+              </tbody>
             </table>
           </article>
           <Footer />
@@ -57,26 +130,7 @@ function App() {
                 </button>
               </div>
               <div className='modal__body'>
-                <form className='form'>
-                  <div className='form__control'>
-                    <label htmlFor='name'>Name</label>
-                    <input type='text' id='name' />
-                  </div>
-                  <div className='form__control'>
-                    <label htmlFor='email'>Email</label>
-                    <input type='email' id='email' />
-                  </div>
-                  <div className='form__control'>
-                    <label htmlFor='role'>Role</label>
-                    <select id='role'>
-                      <option value='admin'>Admin</option>
-                      <option value='user'>User</option>
-                    </select>
-                  </div>
-                  <div className='form__actions'>
-                    <button className='btn__confirm'>Add User</button>
-                  </div>
-                </form>
+                <AddUser onAddUser={handleAddUser} />
               </div>
             </div>
           </section>

@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -8,6 +8,7 @@
   --gray: #d8d9da;
   --yellow: #fff6e0;
   --white: #ffffff;
+  --red: #c21f1f;
 }
 
 *,
