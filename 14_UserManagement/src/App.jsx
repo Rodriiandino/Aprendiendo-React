@@ -1,18 +1,25 @@
 import './App.css'
 import { useState } from 'react'
 import AddUser from './components/AddUser'
+import EditUser from './components/EditUser'
 import Footer from './components/Footer'
 
 function App() {
   const [showModal, setShowModal] = useState(false)
+  const [isEdit, setIsEdit] = useState(false)
+  const [userToEdit, setUserToEdit] = useState(null)
   const [users, setUsers] = useState([])
 
   const handleShowModal = () => {
     setShowModal(true)
+    setIsEdit(false)
+    setUserToEdit(null)
   }
 
   const handleCloseModal = () => {
     setShowModal(false)
+    setIsEdit(false)
+    setUserToEdit(null)
   }
 
   const handleAddUser = (id, name, email, role) => {
@@ -24,7 +31,7 @@ function App() {
     }
 
     setUsers([...users, newUser])
-    setShowModal(false)
+    handleCloseModal()
   }
 
   const handleDeleteUser = id => {
@@ -32,19 +39,24 @@ function App() {
     setUsers(newUsers)
   }
 
-  const handleEditUser = id => {
-    const newUsers = users.map(user => {
-      if (user.id === id) {
-        return {
-          ...user,
-          name: 'new name',
-          email: 'new email',
-          role: 'new role'
-        }
-      }
-      return user
-    })
+  const handleStartEditUser = user => {
+    setShowModal(true)
+    setIsEdit(true)
+    setUserToEdit(user)
+  }
+
+  const handleUpdateUser = (id, name, email, role) => {
+    const editedUser = {
+      id,
+      name,
+      email,
+      role
+    }
+
+    const newUsers = users.map(user => (user.id === id ? editedUser : user))
+
     setUsers(newUsers)
+    handleCloseModal()
   }
 
   const showUsers = () => {
@@ -63,7 +75,10 @@ function App() {
           <td>{email}</td>
           <td>{role}</td>
           <td>
-            <button onClick={() => handleEditUser(id)} className='btn__edit'>
+            <button
+              onClick={() => handleStartEditUser(user)}
+              className='btn__edit'
+            >
               Edit
             </button>
             <button
@@ -124,13 +139,20 @@ function App() {
           <section className='modal'>
             <div className='modal__content'>
               <div className='modal__header'>
-                <h2>Add New User</h2>
+                {isEdit ? <h2>Edit User</h2> : <h2>Add New User</h2>}
                 <button className='btn__close' onClick={handleCloseModal}>
                   X
                 </button>
               </div>
               <div className='modal__body'>
-                <AddUser onAddUser={handleAddUser} />
+                {isEdit ? (
+                  <EditUser
+                    onEditUser={handleUpdateUser}
+                    userToEdit={userToEdit}
+                  />
+                ) : (
+                  <AddUser onAddUser={handleAddUser} />
+                )}
               </div>
             </div>
           </section>

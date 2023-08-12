@@ -1,25 +1,16 @@
-import { useState, useId } from 'react'
 import PropTypes from 'prop-types'
+import { useState } from 'react'
 
-export default function AddUser({ onAddUser }) {
-  const id = useId()
+export default function EditUser({ onEditUser, userToEdit }) {
   const [user, setUser] = useState({
-    id,
-    name: '',
-    email: '',
-    role: 'Admin'
+    name: userToEdit.name,
+    email: userToEdit.email,
+    role: userToEdit.role
   })
 
   const handleSubmit = e => {
     e.preventDefault()
-
-    onAddUser(id, user.name, user.email, user.role)
-
-    setUser({
-      name: '',
-      email: '',
-      role: 'Admin'
-    })
+    onEditUser(userToEdit.id, user.name, user.email, user.role)
   }
 
   return (
@@ -56,12 +47,13 @@ export default function AddUser({ onAddUser }) {
         </select>
       </div>
       <div className='form__actions'>
-        <button className='btn__confirm'>Add User</button>
+        <button className='btn__confirm'>Edit User</button>
       </div>
     </form>
   )
 }
 
-AddUser.propTypes = {
-  onAddUser: PropTypes.func.isRequired
+EditUser.propTypes = {
+  onEditUser: PropTypes.func.isRequired,
+  userToEdit: PropTypes.object.isRequired
 }
