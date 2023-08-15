@@ -2,13 +2,28 @@ import './App.css'
 import { useState } from 'react'
 import AddUser from './components/AddUser'
 import EditUser from './components/EditUser'
+import Header from './components/Header'
+import ShowUsers from './components/ShowUsers'
 import Footer from './components/Footer'
 
 function App() {
   const [showModal, setShowModal] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
   const [userToEdit, setUserToEdit] = useState(null)
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      name: 'John Doe',
+      email: 'Jon@gmail.com',
+      role: 'admin'
+    },
+    {
+      id: 2,
+      name: 'Jane Doe',
+      email: 'Jane@gmail.com',
+      role: 'user'
+    }
+  ])
 
   const handleShowModal = () => {
     setShowModal(true)
@@ -22,6 +37,12 @@ function App() {
     setUserToEdit(null)
   }
 
+  const handleStartEditUser = user => {
+    setShowModal(true)
+    setIsEdit(true)
+    setUserToEdit(user)
+  }
+
   const handleAddUser = (id, name, email, role) => {
     const newUser = {
       id,
@@ -32,17 +53,6 @@ function App() {
 
     setUsers([...users, newUser])
     handleCloseModal()
-  }
-
-  const handleDeleteUser = id => {
-    const newUsers = users.filter(user => user.id !== id)
-    setUsers(newUsers)
-  }
-
-  const handleStartEditUser = user => {
-    setShowModal(true)
-    setIsEdit(true)
-    setUserToEdit(user)
   }
 
   const handleUpdateUser = (id, name, email, role) => {
@@ -59,51 +69,12 @@ function App() {
     handleCloseModal()
   }
 
-  const showUsers = () => {
-    return users.map(user => {
-      const { id, name, email, role } = user
-      return (
-        <tr key={id}>
-          <td>
-            <span>
-              <label htmlFor='select'></label>
-              <input type='checkbox' id='select' />
-            </span>
-          </td>
-          <td>{id}</td>
-          <td>{name}</td>
-          <td>{email}</td>
-          <td>{role}</td>
-          <td>
-            <button
-              onClick={() => handleStartEditUser(user)}
-              className='btn__edit'
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => handleDeleteUser(id)}
-              className='btn__delete'
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      )
-    })
-  }
-
   return (
     <>
       <main>
         <section>
-          <header className='header'>
-            <h1>UserManagement</h1>
-            <div className='header__actions'>
-              <input type='search' placeholder='Search a User' />
-              <button onClick={handleShowModal}>add new User</button>
-            </div>
-          </header>
+          <Header handleShowModal={handleShowModal} />
+
           <article className='body'>
             <table className='table'>
               <thead>
@@ -123,7 +94,11 @@ function App() {
               </thead>
               <tbody>
                 {users.length > 0 ? (
-                  showUsers()
+                  <ShowUsers
+                    users={users}
+                    setUsers={setUsers}
+                    handleStartEditUser={handleStartEditUser}
+                  />
                 ) : (
                   <tr>
                     <td colSpan='6'>No Users</td>

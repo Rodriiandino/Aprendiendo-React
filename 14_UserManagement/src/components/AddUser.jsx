@@ -7,7 +7,7 @@ export default function AddUser({ onAddUser }) {
     id,
     name: '',
     email: '',
-    role: 'Admin'
+    role: 'admin'
   })
 
   const handleSubmit = e => {
@@ -18,7 +18,7 @@ export default function AddUser({ onAddUser }) {
     setUser({
       name: '',
       email: '',
-      role: 'Admin'
+      role: 'admin'
     })
   }
 
@@ -51,8 +51,8 @@ export default function AddUser({ onAddUser }) {
           value={user.role}
           onChange={e => setUser({ ...user, role: e.target.value })}
         >
-          <option value='admin'>Admin</option>
-          <option value='user'>User</option>
+          <option value='admin'>admin</option>
+          <option value='user'>user</option>
         </select>
       </div>
       <div className='form__actions'>
