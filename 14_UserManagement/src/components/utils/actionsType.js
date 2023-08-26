@@ -1,0 +1,5 @@
+export const actionTypes = {
+  SHOW_MODAL: 'SHOW_MODAL',
+  HIDE_MODAL: 'HIDE_MODAL',
+  START_EDIT_USER: 'START_EDIT_USER'
+}

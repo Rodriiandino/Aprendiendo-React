@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
+import { rolesOptions } from './utils/roles'
 
 export default function EditUser({ onEditUser, userToEdit }) {
   const [user, setUser] = useState({
@@ -42,8 +43,11 @@ export default function EditUser({ onEditUser, userToEdit }) {
           value={user.role}
           onChange={e => setUser({ ...user, role: e.target.value })}
         >
-          <option value='admin'>Admin</option>
-          <option value='user'>User</option>
+          {rolesOptions.map(role => (
+            <option key={role.value} value={role.value}>
+              {role.label}
+            </option>
+          ))}
         </select>
       </div>
       <div className='form__actions'>

@@ -1,19 +1,22 @@
 import { useContext } from 'react'
 import { ModalContext } from '../../context/modal.jsx'
+import { actionTypes } from '../utils/actionsType.js'
 
 export function useModal() {
-  const { modal, setModal } = useContext(ModalContext)
+  // dispatch es una función que permite ejecutar las acciones que definimos en el reducer
+  // dispatch recibe como parámetro un objeto que tiene una propiedad type, y opcionalmente puede tener una propiedad payload
+  const { dispatch } = useContext(ModalContext)
 
   const handleShowModal = () => {
-    setModal({ ...modal, showModal: true, isEdit: false, userToEdit: null })
+    dispatch({ type: actionTypes.SHOW_MODAL })
   }
 
   const handleCloseModal = () => {
-    setModal({ ...modal, showModal: false, isEdit: false, userToEdit: false })
+    dispatch({ type: actionTypes.HIDE_MODAL })
   }
 
   const handleStartEditUser = user => {
-    setModal({ ...modal, showModal: true, isEdit: true, userToEdit: user })
+    dispatch({ type: actionTypes.START_EDIT_USER, payload: user })
   }
 
   return {

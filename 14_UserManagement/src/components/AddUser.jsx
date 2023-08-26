@@ -1,7 +1,9 @@
 import { useState, useId } from 'react'
+import { rolesOptions } from './utils/roles'
 import PropTypes from 'prop-types'
 
 export default function AddUser({ onAddUser }) {
+  // useId es un custom hook que genera un id único
   const id = useId()
   const [user, setUser] = useState({
     id,
@@ -51,8 +53,11 @@ export default function AddUser({ onAddUser }) {
           value={user.role}
           onChange={e => setUser({ ...user, role: e.target.value })}
         >
-          <option value='admin'>admin</option>
-          <option value='user'>user</option>
+          {rolesOptions.map(role => (
+            <option key={role.value} value={role.value}>
+              {role.label}
+            </option>
+          ))}
         </select>
       </div>
       <div className='form__actions'>
