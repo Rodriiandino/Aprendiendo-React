@@ -25,15 +25,17 @@ export default function Filter() {
         onChange={handleChangeSearch}
       />
       <button onClick={handleShowModal}>add new User</button>
-      <label htmlFor={roleFilterId}>Role</label>
-      <select id={roleFilterId} onChange={handleChangeRole}>
-        <option value='all'>All</option>
-        {rolesOptions.map(role => (
-          <option key={role.value} value={role.value}>
-            {role.label}
-          </option>
-        ))}
-      </select>
+      <label htmlFor={roleFilterId}>
+        Role
+        <select id={roleFilterId} onChange={handleChangeRole}>
+          <option value='all'>All</option>
+          {rolesOptions.map(role => (
+            <option key={role.value} value={role.value}>
+              {role.label}
+            </option>
+          ))}
+        </select>
+      </label>
     </div>
   )
 }

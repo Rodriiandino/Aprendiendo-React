@@ -76,6 +76,35 @@ section {
   border-color: var(--black);
 }
 
+.header__actions label {
+  color: var(--white);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.header__actions select {
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--gray);
+  transition: border-color 0.25s;
+  padding: 0.6rem 1.2rem;
+}
+
+.header__actions select:hover {
+  border-color: var(--black);
+}
+
+.header__actions select:focus {
+  border-color: var(--black);
+}
+
 /****** ***** table ***** *******/
 
 .body {
@@ -112,6 +141,7 @@ section {
 }
 
 .table thead th {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -135,19 +165,47 @@ section {
   border-radius: 0.5rem;
   background-color: var(--white);
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+  cursor: move;
 }
 
 .table tbody tr:hover {
   background-color: var(--gray);
+
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 }
 
 .table tbody td {
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 0.1rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+}
+
+.table tbody td button {
+  height: 2rem;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--black);
+  color: var(--white);
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.table tbody td button:hover {
+  transform: scale(1.05);
+  background-color: var(--red);
+}
+
+.table thead th:first-child,
+.table tbody td:first-child,
+.table thead th:nth-child(2),
+.table tbody td:nth-child(2) {
+  width: 20%;
 }
 
 /****** ***** Footer ***** *******/
@@ -192,7 +250,7 @@ section {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .header {
     height: auto;
     flex-direction: column;
@@ -205,7 +263,7 @@ section {
   }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 600px) {
   #root {
     padding: 0;
   }
@@ -217,21 +275,39 @@ section {
   .header__actions input {
     width: 60%;
     padding: 0.6rem 0.8rem;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 
   .header__actions button {
     width: 40%;
     padding: 0.6rem 0.8rem;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 
-  .table thead tr {
+  .header__actions label {
+    font-size: 0.9rem;
+  }
+
+  .header__actions select {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .table thead tr,
+  .table thead th,
+  .table tbody tr,
+  .table tbody td {
     padding: 0.5rem 0.3rem;
   }
 
-  .table thead th {
-    padding: 0.5rem 0.3rem;
+  .table tbody td:has(button) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .table tbody td button {
+    width: 100%;
+    padding: 0 0.5rem;
   }
 
   .footer {
@@ -277,6 +353,16 @@ section {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  animation: modal-ent 0.3s ease;
+}
+
+@keyframes modal-ent {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .modal__header {

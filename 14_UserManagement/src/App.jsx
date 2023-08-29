@@ -14,12 +14,7 @@ function App() {
             <table className='table'>
               <thead>
                 <tr>
-                  <th>
-                    <span>
-                      <input type='checkbox' id='selectAll' />
-                      <label htmlFor='selectAll'></label>
-                    </span>
-                  </th>
+                  <th></th>
                   <th>Id</th>
                   <th>Name</th>
                   <th>Email</th>
