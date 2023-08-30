@@ -181,6 +181,7 @@ section {
   gap: 0.1rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  user-select: none;
 }
 
 .table tbody td button {
@@ -206,6 +207,11 @@ section {
 .table thead th:nth-child(2),
 .table tbody td:nth-child(2) {
   width: 20%;
+}
+
+.table thead th:nth-child(5),
+.table tbody td:nth-child(5) {
+  width: 25%;
 }
 
 /****** ***** Footer ***** *******/

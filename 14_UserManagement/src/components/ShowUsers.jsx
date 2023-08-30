@@ -1,12 +1,15 @@
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 import { UsersContext } from '../context/users'
 import { useModal } from './hooks/useModal'
 import { useFilters } from './hooks/useFilters'
+import UserRow from './UserRow'
 
 export default function ShowUsers() {
   const { users, setUsers } = useContext(UsersContext)
   const { handleStartEditUser } = useModal()
   const { filterUser } = useFilters()
+
+  const draggedUserId = useRef(null)
 
   const filteredUser = filterUser(users)
 
@@ -15,66 +18,44 @@ export default function ShowUsers() {
     setUsers(newUsers)
   }
 
-  let row
-
   const handleDragStart = e => {
-    // Se guarda el elemento que se va a arrastrar
-    row = e.target
-    // Se guarda el contenido del elemento que se va a arrastrar
+    draggedUserId.current = e.target
     e.dataTransfer.setData('text/html', e.target.innerHTML)
-
-    // Tipo de efecto que se va a aplicar al arrastrar el elemento
     e.dataTransfer.effectAllowed = 'move'
   }
 
   const handleDragOver = e => {
     e.preventDefault()
+
+    if (e.target === draggedUserId.current) return
+
     const children = Array.from(e.target.parentNode.parentNode.children)
-    if (children.indexOf(e.target.parentNode) > children.indexOf(row)) {
-      e.target.after(row)
+    if (
+      children.indexOf(e.target.parentNode) >
+        children.indexOf(draggedUserId.current) &&
+      e.target.parentNode !== draggedUserId.current
+    ) {
+      e.target.after(draggedUserId.current)
     } else {
-      e.target.parentNode.before(row)
+      e.target.parentNode.before(draggedUserId.current)
     }
   }
 
   return (
     <>
       {filteredUser.length > 0 ? (
-        filteredUser.map(user => {
-          const { id, name, email, role } = user
-          return (
-            <tr
-              key={id}
-              draggable='true'
-              onDragStart={handleDragStart}
-              onDragOver={handleDragOver}
-            >
-              <td>=</td>
-              <td>{id}</td>
-              <td>{name}</td>
-              <td>{email}</td>
-              <td>{role}</td>
-              <td>
-                <button
-                  onClick={() => handleStartEditUser(user)}
-                  className='btn__edit'
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDeleteUser(id)}
-                  className='btn__delete'
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          )
-        })
+        filteredUser.map(user => (
+          <UserRow
+            key={user.id}
+            user={user}
+            handleStartEditUser={handleStartEditUser}
+            handleDeleteUser={handleDeleteUser}
+            handleDragStart={handleDragStart}
+            handleDragOver={handleDragOver}
+          />
+        ))
       ) : (
-        <tr>
-          <td colSpan='6'>No Users</td>
-        </tr>
+        <p>No Users</p>
       )}
     </>
   )

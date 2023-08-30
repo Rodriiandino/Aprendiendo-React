@@ -6,13 +6,13 @@ export const UsersContext = createContext()
 export const UsersProvider = ({ children }) => {
   const [users, setUsers] = useState([
     {
-      id: 1,
+      id: '1',
       name: 'John Doe',
       email: 'Jon@gmail.com',
       role: 'admin'
     },
     {
-      id: 2,
+      id: '2',
       name: 'Jane Doe',
       email: 'Jane@gmail.com',
       role: 'user'
