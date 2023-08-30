@@ -12,7 +12,7 @@ Un repositorio donde se encuentra mi aprendizaje de React a lo largo del tiempo.
 
 - **Fourth project** _(useState, useEffect, useRef, CustomHooks, useMemo, useCallback, debounce)_ -> https://searchplant-andinorodrigo.netlify.app/ --> **_Search_**
   
-- **fifth project** _(useID, useContext, useReducer)_ https://usermanagement-andinorodrigo.netlify.app/ --> **_User-Management_**
+- **fifth project** _(useID, useContext, useReducer)_ -> https://usermanagement-andinorodrigo.netlify.app/ --> **_User-Management_**
 
 Plant search tool is powered by Trefle API, a private plant database. To make it accessible, we created a backend deployed on render and a frontend on Netlify. 
 
