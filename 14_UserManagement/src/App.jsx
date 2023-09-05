@@ -11,21 +11,7 @@ function App() {
         <section>
           <Header />
           <article className='body'>
-            <table className='table'>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <ShowUsers />
-              </tbody>
-            </table>
+            <ShowUsers />
           </article>
           <Footer />
         </section>

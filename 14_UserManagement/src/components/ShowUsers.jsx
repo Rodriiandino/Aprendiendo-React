@@ -1,15 +1,12 @@
-import { useContext, useRef } from 'react'
+import { useContext } from 'react'
 import { UsersContext } from '../context/users'
-import { useModal } from './hooks/useModal'
 import { useFilters } from './hooks/useFilters'
 import UserRow from './UserRow'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
 export default function ShowUsers() {
   const { users, setUsers } = useContext(UsersContext)
-  const { handleStartEditUser } = useModal()
   const { filterUser } = useFilters()
-
-  const draggedUserId = useRef(null)
 
   const filteredUser = filterUser(users)
 
@@ -18,42 +15,45 @@ export default function ShowUsers() {
     setUsers(newUsers)
   }
 
-  const handleDragStart = e => {
-    draggedUserId.current = e.target
-    e.dataTransfer.setData('text/html', e.target.innerHTML)
-    e.dataTransfer.effectAllowed = 'move'
-  }
-
-  const handleDragOver = e => {
-    e.preventDefault()
-
-    if (e.target === draggedUserId.current) return
-
-    const children = Array.from(e.target.parentNode.parentNode.children)
-    if (
-      children.indexOf(e.target.parentNode) >
-        children.indexOf(draggedUserId.current) &&
-      e.target.parentNode !== draggedUserId.current
-    ) {
-      e.target.after(draggedUserId.current)
-    } else {
-      e.target.parentNode.before(draggedUserId.current)
-    }
+  const handleDragEnd = e => {
+    if (!e.destination) return
+    let tempData = Array.from(users)
+    let [source_data] = tempData.splice(e.source.index, 1)
+    tempData.splice(e.destination.index, 0, source_data)
+    setUsers(tempData)
   }
 
   return (
     <>
       {filteredUser.length > 0 ? (
-        filteredUser.map(user => (
-          <UserRow
-            key={user.id}
-            user={user}
-            handleStartEditUser={handleStartEditUser}
-            handleDeleteUser={handleDeleteUser}
-            handleDragStart={handleDragStart}
-            handleDragOver={handleDragOver}
-          />
-        ))
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <table className='table'>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <Droppable droppableId='users'>
+              {provider => (
+                <tbody ref={provider.innerRef} {...provider.droppableProps}>
+                  {filteredUser.map((user, index) => (
+                    <UserRow
+                      key={user.id}
+                      index={index}
+                      user={user}
+                      handleDeleteUser={handleDeleteUser}
+                    />
+                  ))}
+                </tbody>
+              )}
+            </Droppable>
+          </table>
+        </DragDropContext>
       ) : (
         <p>No Users</p>
       )}

@@ -136,7 +136,7 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem 0.5rem 0;
   border-radius: 0.5rem;
 }
 
@@ -153,7 +153,6 @@ section {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
 .table tbody tr {
@@ -161,17 +160,15 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 0;
   background-color: var(--white);
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
-  cursor: move;
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--gray);
 }
 
 .table tbody tr:hover {
   background-color: var(--gray);
-
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
 }
 
 .table tbody td {
