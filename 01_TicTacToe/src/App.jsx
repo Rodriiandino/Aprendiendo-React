@@ -33,6 +33,7 @@ export default function App() {
     const winnerFromStorage = window.localStorage.getItem('winner')
     if (winnerFromStorage === TURNS.X) return winnerFromStorage
     if (winnerFromStorage === TURNS.O) return winnerFromStorage
+    if (winnerFromStorage === 'false') return false
     return null
   })
 
@@ -70,6 +71,11 @@ export default function App() {
       setWinner(newWinner)
     } else if (checkEndGame(listSquares)) {
       setWinner(false)
+      saveGame({
+        squares: listSquares,
+        turn: newTurn,
+        winner: false
+      })
     }
   }
 
