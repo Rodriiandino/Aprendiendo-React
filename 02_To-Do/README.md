@@ -15,7 +15,7 @@ Este proyecto es una aplicación simple de lista de tareas (To-Do List) construi
 2. Abre una terminal en la carpeta del proyecto.
 3. Ejecuta `npm install` para instalar las dependencias.
 4. Ejecuta `npm start` para iniciar la aplicación en modo de desarrollo.
-5. Abre tu navegador y visita el localhost, en el puerto en que se abrio, para jugar al Tic-Tac-Toe.
+5. Abre tu navegador y visita el localhost, en el puerto en que se abrio, para para utilizar la lista de tareas.
 
 ## Enlaces
 - [Demo en Vivo](https://to-do-andinorodrigo.netlify.app/)
