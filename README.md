@@ -12,16 +12,16 @@ Este repositorio documenta mi aprendizaje de React a lo largo del tiempo, a trav
 
 ## 🚀 Proyectos
 ### 1. Tic-Tac-Toe
-**Descripción:** Un juego clásico de Tic-Tac-Toe implementado utilizando useState y LocalStorage.
+**Descripción:** Un juego clásico de Tic-Tac-Toe implementado utilizando **_useState y LocalStorage._**
 
 ### 2. To-Do List
-**Descripción:** Una aplicación de lista de tareas donde puedes agregar y gestionar tus tareas pendientes. Implementado utilizando useState y LocalStorage.
+**Descripción:** Una aplicación de lista de tareas donde puedes agregar y gestionar tus tareas pendientes. Implementado utilizando **_useState y LocalStorage._**
 
 ### 3. Paint App
-**Descripción:** Una aplicación de pintura simple que utiliza useEffect, useRef y CustomHooks para crear un lienzo interactivo.
+**Descripción:** Una aplicación de pintura simple que utiliza **_useEffect, useRef y CustomHooks_** para crear un lienzo interactivo.
 
 ### 4. Search Plant
-**Descripción:** Una aplicación de búsqueda de plantas que utiliza useRef, useMemo, useCallback y debounce para proporcionar resultados de búsqueda instantáneos.
+**Descripción:** Una aplicación de búsqueda de plantas que utiliza **_useRef, useMemo, useCallback y debounce_** para proporcionar resultados de búsqueda instantáneos.
 
 ### 5. User Management
-**Descripción:** Un sistema de gestión de usuarios que hace uso de useContext y useReducer para administrar los datos de usuarios.
+**Descripción:** Un sistema de gestión de usuarios que hace uso de **_useContext, useReducer y useID_** para administrar los datos de usuarios.
