@@ -155,7 +155,7 @@ export default function App() {
       <footer>
         <a
           className='github'
-          href='https://github.com/Rodriiandino/Aprendiendo-React/tree/main/04_TicTacToe'
+          href='https://github.com/Rodriiandino/Aprendiendo-React/tree/main/01_TicTacToe'
           target='_blank'
           rel='noreferrer'
         >
