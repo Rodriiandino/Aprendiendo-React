@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className='footer'>
       <a
-        href='https://github.com/Rodriiandino/Aprendiendo-React/tree/main/09_To-Do'
+        href='https://github.com/Rodriiandino/Aprendiendo-React/tree/main/02_To-Do'
         target='_blank'
         rel='noreferrer'
       >

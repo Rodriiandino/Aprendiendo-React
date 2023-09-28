@@ -92,11 +92,16 @@ main {
   color: #646cff;
 }
 
+.info h3 {
+  width: 80%;
+  word-wrap: break-word;
+}
+
 .info header span {
   position: absolute;
   top: 5px;
   right: 5px;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 800;
   color: #fdfdfd;
   border-radius: 30px;
@@ -113,7 +118,18 @@ main {
 }
 
 .info div {
+  height: 100%;
   color: #fdfdfd;
+}
+
+.info div p {
+  word-wrap: break-word;
+}
+
+.info footer {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .footer {

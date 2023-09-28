@@ -6,22 +6,20 @@ import { saveToDo, delteteFromStores } from './components/Storage'
 import { useState } from 'react'
 
 function App() {
-  // "init" donde se almacenara el array de objetos
   const init = []
 
-  // "toDo" es el array de objetos
   const [toDo, setToDo] = useState(() => {
     const toDoFromStores = window.localStorage.getItem('toDo')
     return toDoFromStores ? JSON.parse(toDoFromStores) : init
   })
 
-  // "handleAddTodo" es la funcion que se encarga de agregar un nuevo objeto al array
   const handleAddTodo = (id, title, description, level) => {
     const newToDo = {
       id,
       title,
       description,
-      level
+      level,
+      completed: false
     }
 
     setToDo([...toDo, newToDo])
@@ -31,13 +29,28 @@ function App() {
     })
   }
 
-  // "handleDeleteCard" es la funcion que se encarga de eliminar un objeto del array
   const handleDeleteCard = id => {
     setToDo(toDo.filter(toDo => toDo.id !== id))
 
     delteteFromStores({
       toDo: toDo.filter(toDo => toDo.id !== id)
     })
+  }
+
+  const handleCompletedTodo = id => {
+    const completedToDo = toDo.find(toDo => toDo.id === id)
+    completedToDo.completed = !completedToDo.completed
+
+    const newToDo = toDo.filter(toDo => toDo.id !== id)
+
+    if (completedToDo.completed) {
+      newToDo.push(completedToDo)
+    } else {
+      newToDo.unshift(completedToDo)
+    }
+
+    setToDo(newToDo)
+    saveToDo({ toDo: newToDo })
   }
 
   return (
@@ -47,7 +60,11 @@ function App() {
         <AddTodo onAddTodo={handleAddTodo} />
 
         <section className='container'>
-          <CardTodo toDo={toDo} onDeleteCard={handleDeleteCard} />
+          <CardTodo
+            toDo={toDo}
+            onCompletedTodo={handleCompletedTodo}
+            onDeleteCard={handleDeleteCard}
+          />
         </section>
       </main>
       <Footer />
