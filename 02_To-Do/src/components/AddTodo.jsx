@@ -67,7 +67,7 @@ export default function AddTodo({ onAddTodo }) {
           <label>
             <span className='date'>Level</span>
             <select
-              name='combo'
+              name='level'
               value={inputValue.level}
               onChange={e =>
                 setInputValue({ ...inputValue, level: e.target.value })
