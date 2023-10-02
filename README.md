@@ -4,11 +4,11 @@ Este repositorio documenta mi aprendizaje de React a lo largo del tiempo, a trav
 
 |#|Proyecto|Código|Web|
 |---|---|---|---|
-|1|Tic-Tac-Toe|[codigo](https://github.com/Rodriiandino/Aprendiendo-React/tree/main/01_TicTacToe)|[demo](https://tictactoe-andinorodrigo.netlify.app/)|
-|2|To-Do|[codigo](https://github.com/Rodriiandino/Aprendiendo-React/tree/main/02_To-Do)|[demo](https://to-do-andinorodrigo.netlify.app/)|
-|3|Paint|[codigo](https://github.com/Rodriiandino/Aprendiendo-React/tree/main/03_Paint)|[demo](https://paint-andinorodrigo.netlify.app/)|
-|4|Search|[codigo](https://github.com/Rodriiandino/Aprendiendo-React/tree/main/04_SearchPlant)|[demo](https://searchplant-andinorodrigo.netlify.app/)|
-|5|User-Management|[codigo](https://github.com/Rodriiandino/Aprendiendo-React/tree/main/05_UserManagement)|[demo](https://usermanagement-andinorodrigo.netlify.app/)|
+|1|Tic-Tac-Toe|[codigo](https://github.com/Rodriiandino/Aprendiendo-React/tree/main/01_TicTacToe)|[demo](https://tic-tac-toe-andinorodrigo.vercel.app/)|
+|2|To-Do|[codigo](https://github.com/Rodriiandino/Aprendiendo-React/tree/main/02_To-Do)|[demo](https://to-do-andinorodrigo.vercel.app/)|
+|3|Paint|[codigo](https://github.com/Rodriiandino/Aprendiendo-React/tree/main/03_Paint)|[demo](https://paint-andinorodrigo.vercel.app/)|
+|4|Search|[codigo](https://github.com/Rodriiandino/Aprendiendo-React/tree/main/04_SearchPlant)|[demo](https://search-plats-andinorodrigo.netlify.app/)|
+|5|User-Management|[codigo](https://github.com/Rodriiandino/Aprendiendo-React/tree/main/05_UserManagement)|[demo](https://user-management-andinorodrigo.netlify.app/)|
 
 ## 🚀 Proyectos
 ### 1. Tic-Tac-Toe
