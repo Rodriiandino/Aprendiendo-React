@@ -7,8 +7,10 @@ Este proyecto es una aplicación de búsqueda de plantas que utiliza React. Los 
 ## Funcionalidades
 
 - Búsqueda instantánea de plantas por nombre.
-- Muestra de información detallada de la planta seleccionada.
+- Muestra de información de la planta seleccionada.
 - Interfaz de usuario intuitiva.
+
+![416shots_so](https://github.com/Rodriiandino/Aprendiendo-React/assets/106351323/b463805e-5a4b-483c-95ba-696300c78efc)
 
 ## Cómo Ejecutar
 

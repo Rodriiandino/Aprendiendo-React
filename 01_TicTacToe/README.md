@@ -18,4 +18,4 @@ Este proyecto es una implementación del clásico juego Tic-Tac-Toe (Tres en lí
 5. Abre tu navegador y visita el localhost, en el puerto en que se abrio, para jugar al Tic-Tac-Toe.
 
 ## Enlaces
-- [Demo en Vivo](https://tictactoe-andinorodrigo.netlify.app/)
+- [Demo en Vivo](https://tic-tac-toe-andinorodrigo.vercel.app/)
