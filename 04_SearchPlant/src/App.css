@@ -115,7 +115,25 @@ li {
   padding: 1rem;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 730px) {
+  main {
+    margin-top: 0;
+  }
+
+  header {
+    margin: 0.5rem 0 0 0;
+  }
+
+  .title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .results {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+  }
+
   .form {
     flex-direction: column;
   }

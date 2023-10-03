@@ -43,7 +43,7 @@ function App() {
   return (
     <>
       <header>
-        <h1>Buscador de Plantas</h1>
+        <h1 className='title'>Buscador de Plantas</h1>
         <form className='form' onSubmit={handleSearch}>
           {error ? <p style={{ color: 'red' }}>{error}</p> : null}
           <label>
@@ -62,11 +62,13 @@ function App() {
             <input type='checkbox' onChange={handleSort} checked={sort} />
           </label>
 
-          <button type='submit'>Buscar</button>
-          <button type='button' onClick={reset}>
-            {' '}
-            Resetear{' '}
-          </button>
+          <div>
+            <button type='submit'>Buscar</button>
+            <button type='button' onClick={reset}>
+              {' '}
+              Resetear{' '}
+            </button>
+          </div>
         </form>
       </header>
       <main>
