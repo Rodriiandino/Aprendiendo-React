@@ -67,6 +67,7 @@ export default function AddTodo({ onAddTodo }) {
           <label>
             <span className='date'>Level</span>
             <select
+              data-testid='select'
               name='level'
               value={inputValue.level}
               onChange={e =>
@@ -78,7 +79,7 @@ export default function AddTodo({ onAddTodo }) {
               <option value='high'>High</option>
             </select>
           </label>
-          <button type='submit'>ToDo</button>
+          <button type='submit'>Add</button>
         </form>
       </section>
     </>

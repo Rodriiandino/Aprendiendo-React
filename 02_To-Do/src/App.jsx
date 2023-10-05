@@ -2,7 +2,7 @@ import './App.css'
 import AddTodo from './components/AddTodo'
 import CardTodo from './components/CardTodo'
 import Footer from './components/Footer'
-import { saveToDo, delteteFromStores } from './components/Storage'
+import { saveToDo } from './components/Storage'
 import { useState } from 'react'
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
   const handleDeleteCard = id => {
     setToDo(toDo.filter(toDo => toDo.id !== id))
 
-    delteteFromStores({
+    saveToDo({
       toDo: toDo.filter(toDo => toDo.id !== id)
     })
   }

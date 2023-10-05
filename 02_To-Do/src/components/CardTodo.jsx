@@ -47,7 +47,9 @@ function Card({ toDo, onCompletedTodo, onDeleteCard }) {
         <p>{toDo.description}</p>
       </div>
       <footer>
-        <button onClick={() => onCompletedTodo(toDo.id)}>Complete</button>
+        <button onClick={() => onCompletedTodo(toDo.id)}>
+          {toDo.completed ? 'Completed' : 'Complete'}
+        </button>
         <button onClick={() => onDeleteCard(toDo.id)}>Delete</button>
       </footer>
     </div>

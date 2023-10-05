@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { saveToDo, delteteFromStores, saveIdToDo } from '../components/Storage'
+import { saveToDo, saveIdToDo } from '../components/Storage'
 
 describe('Storage functions', () => {
   const toDo = [
@@ -14,7 +14,7 @@ describe('Storage functions', () => {
   })
 
   it('should delete toDo from localStorage', () => {
-    delteteFromStores({ toDo: [] })
+    saveToDo({ toDo: [] })
     expect(JSON.parse(window.localStorage.getItem('toDo'))).toEqual([])
   })
 

@@ -1,30 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { render } from '@testing-library/react'
-import { JSDOM } from 'jsdom'
 import AddTodo from '../components/AddTodo'
 
 describe('AddTodo', () => {
-  const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>')
-  global.window = dom.window
-  global.document = dom.window.document
-
-  const localStorageMock = (() => {
-    let store = {}
-    return {
-      getItem: key => store[key],
-      setItem: (key, value) => {
-        store[key] = value.toString()
-      },
-      clear: () => {
-        store = {}
-      }
-    }
-  })()
-
-  Object.defineProperty(window, 'localStorage', {
-    value: localStorageMock
-  })
-
   it('should render the component', () => {
     const { container } = render(<AddTodo />)
 
@@ -45,5 +23,19 @@ describe('AddTodo', () => {
 
     expect(title.value).toBe('')
     expect(description.value).toBe('')
+  })
+
+  it('should render the select with the option low', () => {
+    const { getByTestId } = render(<AddTodo />)
+
+    const level = getByTestId('select')
+
+    expect(level.value).toBe('low')
+  })
+
+  it('should render the button with the text Add', () => {
+    const { getByText } = render(<AddTodo />)
+
+    expect(getByText('Add')).toBeDefined()
   })
 })
