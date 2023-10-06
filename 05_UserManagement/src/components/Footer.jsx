@@ -3,7 +3,7 @@ export default function Footer() {
     <>
       <footer className='footer'>
         <a
-          href='https://github.com/Rodriiandino/Aprendiendo-React/tree/main/14_UserManagement'
+          href='https://github.com/Rodriiandino/Aprendiendo-React/tree/main/05_UserManagement'
           target='_blank'
           rel='noreferrer'
         >

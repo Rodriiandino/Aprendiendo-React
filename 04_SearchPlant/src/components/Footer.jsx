@@ -3,13 +3,13 @@ export default function Footer() {
     <>
       <footer className='footer'>
         <a
-          href='https://github.com/Rodriiandino/Aprendiendo-React/tree/main/12_Paint'
+          href='https://github.com/Rodriiandino/Aprendiendo-React/tree/main/04_SearchPlant'
           target='_blank'
           rel='noreferrer'
         >
           <img className='github' src='/github.svg' alt='github' />
         </a>
-        <p>"Built with care by Andino Rodrigo Agustín"</p>
+        <p>&ldquo;Built with care by Andino Rodrigo Agust&iacute;n&rdquo;</p>
       </footer>
     </>
   )
