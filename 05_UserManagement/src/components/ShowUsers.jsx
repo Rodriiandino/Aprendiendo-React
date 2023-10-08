@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { UsersContext } from '../context/users'
 import { useFilters } from './hooks/useFilters'
+import { saveUsers } from './utils/storage'
 import UserRow from './UserRow'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
@@ -13,6 +14,7 @@ export default function ShowUsers() {
   const handleDeleteUser = id => {
     const newUsers = users.filter(user => user.id !== id)
     setUsers(newUsers)
+    saveUsers(newUsers)
   }
 
   const handleDragEnd = e => {
@@ -21,6 +23,7 @@ export default function ShowUsers() {
     let [source_data] = tempData.splice(e.source.index, 1)
     tempData.splice(e.destination.index, 0, source_data)
     setUsers(tempData)
+    saveUsers(tempData)
   }
 
   return (

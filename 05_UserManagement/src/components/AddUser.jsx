@@ -1,10 +1,12 @@
-import { useState, useId } from 'react'
+import { useState } from 'react'
 import { rolesOptions } from './utils/roles'
 import PropTypes from 'prop-types'
+import { saveId } from './utils/storage'
 
 export default function AddUser({ onAddUser }) {
-  // useId es un custom hook que genera un id único
-  const id = useId()
+  const idFromStores = window.localStorage.getItem('id-users')
+  const id = idFromStores ? JSON.parse(idFromStores) : '3'
+
   const [user, setUser] = useState({
     id,
     name: '',
@@ -21,6 +23,12 @@ export default function AddUser({ onAddUser }) {
       name: '',
       email: '',
       role: 'admin'
+    })
+
+    const newId = (parseInt(id) + 1).toString()
+
+    saveId({
+      id: newId
     })
   }
 

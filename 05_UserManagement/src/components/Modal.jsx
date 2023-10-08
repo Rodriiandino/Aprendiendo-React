@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { ModalContext } from '../context/modal'
 import { UsersContext } from '../context/users'
 import { useModal } from './hooks/useModal'
+import { saveUsers } from './utils/storage'
 import EditUser from './EditUser'
 import AddUser from './AddUser'
 
@@ -22,6 +23,7 @@ export default function Modal() {
     }
 
     setUsers([...users, newUser])
+    saveUsers([...users, newUser])
     handleCloseModal()
   }
 
@@ -36,6 +38,7 @@ export default function Modal() {
     const newUsers = users.map(user => (user.id === id ? editedUser : user))
 
     setUsers(newUsers)
+    saveUsers(newUsers)
     handleCloseModal()
   }
 
